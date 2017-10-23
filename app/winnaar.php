@@ -13,7 +13,7 @@ class winnaar extends Model
      * @var array
      */
     protected $fillable = [
-        'gekwalificeerd',
+        'qualified',
     ];
 
     public function Users()

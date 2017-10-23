@@ -20,7 +20,7 @@ class CreateVerantwoordelijkeTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('naam');
-            $table->boolean('is_deleted');
+            $table->boolean('is_deleted')->default(0);
             $table->foreign('wedstrijd_id')->references('id')->on('wedstrijd')->onDelete('cascade');
         });
     }

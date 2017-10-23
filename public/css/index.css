@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#header {
+    background-color: #cd163a;
+}
+
+.btnLarge {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 200px;
+    background: #000;
+    color: #fff;
+    font-size: 16px;
+
+    text-align: center;
+    padding: 18px 20px 0 20px;
+    display: inline-block;
+    border: 0;
+    outline: 0;
+    height: 55px;
+    line-height: normal;
+
+    text-decoration: none;
+}
+
+h3 {
+    font-size: 30px;
+    line-height: 30px;
+    color: #ce163b;
+    margin-bottom: 20px;
+
+    font-weight: normal;
+    text-transform: uppercase;
+    text-rendering: optimizelegibility;
+}
+
+p {
+    margin: 20px 0;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 23px;
+}
+
+h2 {
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+    font-size: 23px;
+    line-height: 23px;
+    font-weight: normal;
+    color: inherit;
+    text-transform: uppercase;
+    text-rendering: optimizelegibility;
+}

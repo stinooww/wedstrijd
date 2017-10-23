@@ -1,5 +1,5 @@
-@yield('Index')
-@include('layouts.app')
+@extends('Index')
+{{--@include('layouts.app')--}}
 @section('content')
 
     <div class="landing">
@@ -25,6 +25,14 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <h1>Dit is het overzicht van alle winnaars van de vorige periodes</h1>
+                <div class="winnaarslijst">
+                    @foreach($winnaars as $winnaar)
+                        <ul>
+                            <li>{{$winnaar->name}}</li>
+                        </ul>
+                    @endforeach
+                </div>
+
             </div>
         </div>
     </div>

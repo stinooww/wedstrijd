@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
 class HomeController extends Controller
 {
     /**
@@ -22,5 +24,11 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function show()
+    {
+        $winnaars = DB::table('winnaar')->where('user_id', '=', 'id' And 'qualified', 0);
+        return view('home.home', compact('winnaars'));
     }
 }

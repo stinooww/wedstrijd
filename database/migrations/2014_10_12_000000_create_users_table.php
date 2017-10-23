@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->ipAddress('ip')->unique();
-            $table->boolean('is_deleted');
-            $table->boolean('gekwalificeerd');
+            $table->boolean('is_deleted')->default(0);
+            $table->boolean('qualified')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
