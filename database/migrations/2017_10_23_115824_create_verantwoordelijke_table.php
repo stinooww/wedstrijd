@@ -16,6 +16,12 @@ class CreateVerantwoordelijkeTable extends Migration
         Schema::create('verantwoordelijke', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('wedstrijd_id')->unsigned();
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('naam');
+            $table->boolean('is_deleted');
+            $table->foreign('wedstrijd_id')->references('id')->on('wedstrijd')->onDelete('cascade');
         });
     }
 

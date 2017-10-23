@@ -15,6 +15,14 @@ class CreateWedstrijdTable extends Migration
     {
         Schema::create('wedstrijd', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('verantwoordelijke_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->string('name');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->boolean('is_actief');
+            $table->foreign('verantwoordelijke_id')->references('id')->on('verantwoordelijke')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
             $table->timestamps();
         });
     }

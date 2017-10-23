@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token', 'ip'
     ];
+
+    public function winnaar()
+    {
+        return $this->belongsTo('App\winnaar');
+    }
+
+    public function wedstrijd()
+    {
+        return $this->belongsTo('App\wedstrijd');
+    }
 }
