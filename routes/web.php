@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', 'HomeController@show');
-
+Route::get('/', 'HomeController@show')
+    ->name('homepage');
+Route::get('/home', 'HomeController@show');
+Route::get('/store', 'HomeController@store')
+    ->name('inschrijvingspagina');
 Auth::routes();

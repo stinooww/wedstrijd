@@ -13,57 +13,56 @@
 
 
     <title>Jupiler Game</title>
-{{--<script type="text/javascript" src="<?php echo asset('js/responsive-nav.js')?>"></script>--}}
 
-<!-- Fonts -->
-
-    <!-- Styles -->
 
 </head>
 <body>
 
 
 <div id="header">
-    <img src="{{ asset('images/logo-03.png')}}" alt="logo Jupiler" class="img-responsive">
+
     <div class="wrapper">
         <nav class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nav-collapse ">
-
-            <ul>
-
-                <li>
-                    <a href="/home">Home</a>
-                </li>
+            <img src="{{ asset('images/logo-03.png')}}" id="logo" alt="logo Jupiler" class="img-responsive">
+            <div id="wrapperMenu">
 
 
-                <div id="login">
-                    @if (Auth::check())
-                        <li class="login">
-                            <a href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
+                <ul id="menu">
+
+                    <li>
+                        <a href="/home">Home</a>
+                    </li>
+
+
+                    <div id="login">
+                        @if (Auth::check())
+                            <li class="login">
+                                <a href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                Uitloggen
-                            </a>
+                                    Uitloggen
+                                </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                    @else
-                        <li class="login">
-                            <a href="{{ url('/login') }}">Login</a>
-                        </li>
-                        <li class="login">
-                            <a href="{{ url('/register') }}">Registreer</a>
-                        </li>
-                    @endif
-                </div>
-                {{--<li>--}}
-                {{--Contact--}}
-                {{--</li>--}}
-                <div class="clearfix"></div>
-            </ul>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        @else
+                            <li class="login">
+                                <a href="{{ url('/login') }}">Login</a>
+                            </li>
+                            {{--<li class="login">--}}
+                            {{--<a href="{{ url('/register') }}">Registreer</a>--}}
+                            {{--</li>--}}
+                        @endif
+                    </div>
+                    {{--<li>--}}
+                    {{--Contact--}}
+                    {{--</li>--}}
+                    <div class="clearfix"></div>
+                </ul>
 
-
+            </div>
         </nav>
         <div class="clearfix"></div>
     </div>
@@ -71,7 +70,7 @@
 </div>
 @yield('content')
 <footer>
-    <p>2017 Jupiler wedstrijd | Privacy & gebruiksvoorwaarde</p>
+    <p>2017 Jupiler wedstrijd | Privacy & gebruiksvoorwaarden</p>
 
     <div class="clearfix"></div>
 </footer>

@@ -1,19 +1,22 @@
 @extends('Index')
-{{--@include('layouts.app')--}}
+
 @section('content')
-
-    <div class="landing">
+    <div>
+        <div id="home">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-offset-4 col-lg-8 col-md-8 col-md-offset-4 col-sm-12" id="contentLanding">
+
+                <div>
+                    <h2>Wie word de nieuwe <span id="jupiler">Jupiler</span> winnaar??</h2>
+
+                    <p>Vul de super moeilijke vraag in met al je gegevens en maak kans op 5 meter bier .
+                        <br> Als je de vraag juist hebt beantwoord zal je worden verwittigd per e-mail! </p>
+                </div>
 
 
-                <h1>Wie word de nieuwe jupiler winnaar??</h1>
-
-                <p>De jupiler wedstrijd gaat als volgt: registreer jezelf en vul dan de super moeilijke vraag in. Als
-                    deze juist is word je verwittigd per mail. Je mag maar 1 keer meedoen per wedstrijd</p>
-                <div class="calltoAction">
+                <div id="calltoAction">
                     <li class="registreerKnop">
-                        <a href="{{ url('/register') }}">Registreer je hier</a>
+                        <a id="call" href="{{ route('inschrijvingspagina') }}">Doe mee aan de wedstrijd</a>
                     </li>
                 </div>
             </div>
@@ -21,20 +24,23 @@
 
 
     </div>
-    <div class="lijst">
+        <div id="lijst">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <h1>Dit is het overzicht van alle winnaars van de vorige periodes</h1>
+            <div class="col-lg-offset-4 col-lg-8 col-md-8 col-md-offset-4 col-sm-12" id="lijstWinnaars">
+                <h2>Overzicht van al de winnaars van vorige periodes</h2>
                 <div class="winnaarslijst">
-                    @foreach($winnaars as $winnaar)
-                        <ul>
-                            <li>{{$winnaar->name}}</li>
-                        </ul>
-                    @endforeach
+                    <a href="{{ route('homepage') }}">home</a>
+                    {{--@foreach($winnaars as $winnaar)--}}
+                    {{--<ul>--}}
+                    {{--<li>{{$winnaar->name}}</li>--}}
+                    {{--</ul>--}}
+                    {{--@endforeach--}}
                 </div>
 
             </div>
         </div>
+        </div>
     </div>
+
 
 @endsection
