@@ -67,6 +67,9 @@ li {
     background-color: white;
 }
 
+a {
+    color: #ce163b;
+}
 /*css menu  + header*/
 
 #menu {
@@ -146,6 +149,9 @@ li {
 
 }
 
+#call a {
+    color: white;
+}
 #call:hover {
     border: 5px solid #ce163b;
     color: #ce163b;
@@ -180,4 +186,33 @@ li {
 .panel-heading {
     background-color: black !important;
     color: white !important;
+}
+
+.inputsField {
+    width: 40%;
+
+}
+
+.inputsField:active {
+    /*border: 3px solid black !important;*/
+}
+
+.form-control:focus {
+    /*border: 3px solid black ;*/
+}
+
+#submitBtn {
+    margin-top: 5%;
+}
+
+.inputss {
+    padding-bottom: 5px;
+}
+
+.form-control:focus {
+    border-color: black;
+}
+
+.form-group {
+    margin-top: 5%;
 }

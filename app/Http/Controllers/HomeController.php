@@ -31,10 +31,6 @@ class HomeController extends Controller
 //             , compact('winnaars'));
     }
 
-    public function store()
-    {
 
-        return view('home.inschrijving');
-    }
 
 }

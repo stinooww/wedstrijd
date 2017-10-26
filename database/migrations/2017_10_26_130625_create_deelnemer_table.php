@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVerantwoordelijkeTable extends Migration
+class CreateDeelnemerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,21 @@ class CreateVerantwoordelijkeTable extends Migration
      */
     public function up()
     {
-        Schema::create('verantwoordelijke', function (Blueprint $table) {
+        Schema::create('deelnemer', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->integer('wedstrijd_id')->unsigned();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('naam');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('street');
+            $table->string('streetnumber');
+            $table->integer('postcode');
+            $table->string('email');
+            $table->string('question');
             $table->boolean('is_deleted')->default(0);
+            $table->boolean('qualified')->default(0);
+            $table->ipAddress('ip')->unique();
             $table->foreign('wedstrijd_id')->references('id')->on('wedstrijd')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -32,6 +38,6 @@ class CreateVerantwoordelijkeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('verantwoordelijke');
+        Schema::dropIfExists('deelnemer');
     }
 }

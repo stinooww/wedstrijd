@@ -11,11 +11,11 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-     *
+     *user met extra atribuut role  zodat deze verantwoordelijke kunnen worden
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'qualified', 'is_deleted'
+        'name', 'email', 'password', 'role'
     ];
 
     /**
@@ -24,16 +24,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'ip'
+        'password', 'remember_token',
     ];
-
-    public function winnaar()
-    {
-        return $this->belongsTo('App\winnaar');
-    }
-
     public function wedstrijd()
     {
-        return $this->belongsTo('App\wedstrijd');
+        return $this->hasMany('App\wedstrijd');
     }
+
 }

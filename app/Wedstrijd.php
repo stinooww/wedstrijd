@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class wedstrijd extends Model
 {
-    //wedstrijd heeft attributen id,start en eind datum,naam,is_actief,wedstrijdeelnemer(fk),wedstrijdverantwoordelijke(fk)
+    //wedstrijd heeft attributen id,start en eind datum,wedstrijdnaam,is_actief,,wedstrijdverantwoordelijke(fk)
     /**
      * The attributes that are mass assignable.
      *
@@ -18,11 +18,8 @@ class wedstrijd extends Model
 
     public function user()
     {
-        return $this->hasMany('app\User');
+        return $this->belongsTo('app\User');
     }
 
-    public function verantwoordelijke()
-    {
-        return $this->belongsTo('app\verantwoordelijke');
-    }
+
 }

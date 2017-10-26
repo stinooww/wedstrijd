@@ -15,11 +15,11 @@ class CreateWinnaarTable extends Migration
     {
         Schema::create('winnaar', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('wedstrijd_id')->unsigned();
-            $table->boolean('qualified')->default(0);
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
-            $table->foreign('wedstrijd_id')->references('id')->on('wedstrijd')->onDelete('cascade');
+            $table->integer('deelnemer_id')->unsigned();
+
+            $table->boolean('disqualified')->default(0);
+            $table->foreign('deelnemer_id')->references('id')->on('deelnemer')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

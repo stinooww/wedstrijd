@@ -7,7 +7,7 @@
             <div class="col-lg-offset-4 col-lg-8 col-md-8 col-md-offset-4 col-sm-12" id="contentLanding">
 
                 <div>
-                    <h2>Wie word de nieuwe <span id="jupiler">Jupiler</span> winnaar??</h2>
+                    <h2>Wie wordt de nieuwe <span id="jupiler">Jupiler</span> winnaar??</h2>
 
                     <p>Vul de super moeilijke vraag in met al je gegevens en maak kans op 5 meter bier .
                         <br> Als je de vraag juist hebt beantwoord zal je worden verwittigd per e-mail! </p>

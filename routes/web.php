@@ -14,6 +14,6 @@
 Route::get('/', 'HomeController@show')
     ->name('homepage');
 Route::get('/home', 'HomeController@show');
-Route::get('/store', 'HomeController@store')
+Route::get('/store', 'InschrijvingController@index')
     ->name('inschrijvingspagina');
 Auth::routes();

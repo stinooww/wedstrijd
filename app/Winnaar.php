@@ -13,12 +13,12 @@ class winnaar extends Model
      * @var array
      */
     protected $fillable = [
-        'qualified',
+        'disqualified',
     ];
 
     public function Users()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Deelnemer');
     }
 
     public function wedstrijd()
