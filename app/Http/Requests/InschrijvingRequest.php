@@ -18,17 +18,26 @@ class InschrijvingRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
+     *'required,regex:/^[A-Za-z0-9@!#\$%\^&\*]+$\''
      * @return array
      */
     public function rules()
     {
         return [
             //
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'required|email',
-            'vraag' => 'required'
+            'first_name' => 'required,alpha,min:2',
+            'last_name' => 'required,alpha,min:2',
+            'email' => [
+                'required',
+                'email',
+            ],
+
+            'streetnumber' => 'integer',
+            'street' => 'string',
+            'postcode' => 'integer',
+            'question' => 'required',
+            'ip' => 'ip'
         ];
     }
 }
+

@@ -16,7 +16,7 @@ class winnaar extends Model
         'disqualified',
     ];
 
-    public function Users()
+    public function deelnemer()
     {
         return $this->belongsTo('App\Deelnemer');
     }
