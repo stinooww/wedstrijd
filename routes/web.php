@@ -16,4 +16,6 @@ Route::get('/', 'HomeController@show')
 Route::get('/home', 'HomeController@show');
 Route::get('/store', 'InschrijvingController@index')
     ->name('inschrijvingspagina');
+Route::get('/redirect', 'SocialAuthFacebookController@redirect');
+Route::get('/callback', 'SocialAuthFacebookController@callback');
 Auth::routes();

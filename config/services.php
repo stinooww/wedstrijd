@@ -34,5 +34,9 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
+    'facebook' => [
+        'client_id' => '229825640885462',
+        'client_secret' => '5f2fca22331fdebe613b46801456f252',
+        'redirect' => 'http://wedstrijd.dev/callback',
+    ],
 ];

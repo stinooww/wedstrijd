@@ -4,8 +4,8 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-offset-3 col-lg-9 col-md-3 col-md-9 col-sm-12">
-                {!! Form::open(array('url'=>'inschrijvings/store','method'=> 'POST', 'id'=>'formInschrijving')) !!}
+            <div class="col-lg-offset-2 col-lg-10 col-md-offset-2 col-md-10 col-sm-12">
+                {!! Form::open(array('url'=>'inschrijving/store','method'=> 'POST', 'id'=>'formInschrijving')) !!}
                 <div class="breadcrumb col-lg-4 col-md-4">
 
                     <a href="{{ route('homepage') }}"><- ga terug</a>
@@ -25,13 +25,16 @@
                 {{ Form::hidden('wedstrijdId', Crypt::encrypt($wedstrijdId)) }}
                 {{ csrf_field() }}
                 <div class="form-group inputss">
-                    {!! Form::label('firstname', 'Voornaam',['class'=> 'col-md-5 control-label'])  !!}
+                    {!! Form::label('firstname', 'Voornaam',['class'=> 'col-md-5 control-label controle'])  !!}
                     <div class="col-md-7 ">
                         {!! Form::text('firstname', null, ['class' => 'form-control inputsField']) !!}
                     </div>
+                    <div class="col-md-2">
+                        <span id="errorFirst"></span>
+                    </div>
                 </div>
                 <div class="form-group inputss">
-                    {!! Form::label('lastname', 'Achternaam',['class'=> 'col-md-5 control-label'])  !!}
+                    {!! Form::label('lastname', 'Achternaam',['class'=> 'col-md-5 control-label controle'])  !!}
                     <div class="col-md-7 ">
                         {!! Form::text('lastname', null, ['class' => 'form-control inputsField']) !!}
                     </div>
@@ -73,9 +76,15 @@
                 {{--</div>--}}
                 {{--</div>--}}
 
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <a href="{{url('/redirect')}}" class="btn btn-primary btn-lg">Login with Facebook</a>
+                    </div>
+                </div>
+
                 <div class="form-group ">
-                    <div class="col-md-offset-5 col-md-5" id="submitBtn">
-                        {!! Form::submit('Win 5 Meter bier',['class'=>'btn btnLarge form-control btnSubmit', 'id'=>'btnSubmit']) !!}
+                    <div class=" col-md-6" id="submitBtn">
+                        {!! Form::submit('Win 5 Meter bier!',['class'=>'btn btnLarge form-control btnSubmit', 'id'=>'btnSubmit']) !!}
                     </div>
                 </div>
 

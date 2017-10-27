@@ -25,6 +25,10 @@ class InschrijvingRequest extends FormRequest
     {
         return [
             //
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|email',
+            'vraag' => 'required'
         ];
     }
 }

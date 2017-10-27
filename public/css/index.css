@@ -70,6 +70,11 @@ li {
 a {
     color: #ce163b;
 }
+
+.input-error {
+    border-color: #ce163b;
+
+}
 /*css menu  + header*/
 
 #menu {
