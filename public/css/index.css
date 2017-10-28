@@ -9,7 +9,7 @@ body {
 h3 {
     font-size: 30px;
     line-height: 30px;
-    color: #ce163b;
+    color: #cd163a;
     margin-bottom: 20px;
 
     font-weight: normal;
@@ -68,11 +68,11 @@ li {
 }
 
 a {
-    color: #ce163b;
+    color: #cd163a;
 }
 
 .input-error {
-    border-color: #ce163b;
+    border-color: #cd163a;
 
 }
 /*css menu  + header*/
@@ -149,7 +149,7 @@ a {
     text-decoration: none;
     padding: 20px 12px;
     font-weight: normal;
-    background-color: #ce163b;
+    background-color: #cd163a;
     margin: 2% 0 0 4%;
 
 }
@@ -158,7 +158,7 @@ a {
     color: white;
 }
 #call:hover {
-    border: 5px solid #ce163b;
+    border: 5px solid #cd163a;
     color: #ce163b;
     font-weight: normal;
     padding: 16px 4px;
@@ -168,12 +168,12 @@ a {
 
 #jupiler {
     line-height: 30px;
-    color: #ce163b;
+    color: #cd163a;
     font-weight: bold;
 }
 
 #lijst {
-    background-color: #ce163b;
+    background-color: #cd163a;
     height: 450px;
 }
 

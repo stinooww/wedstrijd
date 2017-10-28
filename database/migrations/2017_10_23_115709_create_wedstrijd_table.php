@@ -19,7 +19,7 @@ class CreateWedstrijdTable extends Migration
             $table->string('name');
             $table->date('start_date');
             $table->date('end_date');
-            $table->boolean('is_active')->default(1);
+            $table->boolean('is_active')->default(0);
             // $table->foreign('verantwoordelijke_id')->references('id')->on('verantwoordelijke')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
             $table->timestamps();
