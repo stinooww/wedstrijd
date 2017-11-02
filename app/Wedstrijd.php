@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class wedstrijd extends Model
 {
+    public $table = "wedstrijd";
     //wedstrijd heeft attributen id,start en eind datum,wedstrijdnaam,is_actief,,wedstrijdverantwoordelijke(fk)
     /**
      * The attributes that are mass assignable.

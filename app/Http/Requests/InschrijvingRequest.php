@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class InschrijvingRequest extends FormRequest
@@ -36,7 +35,7 @@ class InschrijvingRequest extends FormRequest
             'street' => 'string',
             'postcode' => 'integer',
             'question' => 'required',
-            'ip' => 'ip'
+            'deelnemerIP' => 'ip,unique'
         ];
     }
 }

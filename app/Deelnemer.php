@@ -8,6 +8,7 @@ class Deelnemer extends Model
 {
     //dit model defenieert de wedstrijdeelnemer, attributen zijn: id, voornaam, achternaam, straat, nummer,gemeente,disqualified, is_deleted email, ip,wedstrijdvraag
 
+    protected $table = "deelnemer";
     protected $fillable = [
         'firstname', 'lastname', 'email', 'street', 'streetnumber', 'postcode', 'disqualified', 'is_deleted', 'question'
     ];

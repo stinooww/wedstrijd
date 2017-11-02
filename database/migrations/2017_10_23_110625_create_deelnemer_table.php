@@ -14,8 +14,11 @@ class CreateDeelnemerTable extends Migration
     public function up()
     {
         Schema::create('deelnemer', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->increments('id');
             $table->integer('wedstrijd_id')->unsigned();
+            $table->foreign('wedstrijd_id')->references('id')->on('wedstrijd')->onDelete('cascade');
+
             $table->string('firstname');
             $table->string('lastname');
             $table->string('street');
@@ -26,7 +29,6 @@ class CreateDeelnemerTable extends Migration
             $table->boolean('is_deleted')->default(0);
             $table->boolean('qualified')->default(0);
             $table->ipAddress('ip')->unique();
-            $table->foreign('wedstrijd_id')->references('id')->on('wedstrijd')->onDelete('cascade');
             $table->timestamps();
         });
     }

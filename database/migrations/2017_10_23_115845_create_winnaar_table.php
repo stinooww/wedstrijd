@@ -14,12 +14,12 @@ class CreateWinnaarTable extends Migration
     public function up()
     {
         Schema::create('winnaar', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->increments('id');
             $table->integer('deelnemer_id')->unsigned();
-
-            $table->boolean('disqualified')->default(0);
             $table->foreign('deelnemer_id')->references('id')->on('deelnemer')->onDelete('cascade');
 
+            $table->boolean('disqualified')->default(0);
             $table->timestamps();
         });
     }

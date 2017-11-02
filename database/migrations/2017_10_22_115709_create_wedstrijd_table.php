@@ -14,14 +14,15 @@ class CreateWedstrijdTable extends Migration
     public function up()
     {
         Schema::create('wedstrijd', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->string('name');
             $table->date('start_date');
             $table->date('end_date');
             $table->boolean('is_active')->default(0);
-            // $table->foreign('verantwoordelijke_id')->references('id')->on('verantwoordelijke')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
             $table->timestamps();
         });
     }

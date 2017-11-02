@@ -29,12 +29,12 @@
             <div class="col-lg-offset-4 col-lg-8 col-md-8 col-md-offset-4 col-sm-12" id="lijstWinnaars">
                 <h2>Overzicht van al de winnaars van vorige periodes</h2>
                 <div class="winnaarslijst">
-                    <a href="{{ route('homepage') }}">home</a>
-                    {{--@foreach($winnaars as $winnaar)--}}
-                    {{--<ul>--}}
-                    {{--<li>{{$winnaar->name}}</li>--}}
-                    {{--</ul>--}}
-                    {{--@endforeach--}}
+
+                    @foreach($winnaars as $winnaar)
+                        <ul>
+                            <li>{{$winnaar->deelnemer->firstname}} {{$winnaar->deelnemer->lastname}}</li>
+                        </ul>
+                    @endforeach
                 </div>
 
             </div>

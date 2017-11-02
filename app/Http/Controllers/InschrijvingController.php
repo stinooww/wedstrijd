@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 use App\Deelnemer;
 use App\Http\Requests\InschrijvingRequest;
+use App\wedstrijd;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 
 class InschrijvingController extends Controller
@@ -15,38 +17,51 @@ class InschrijvingController extends Controller
 
     public function index()
     {
-        $wedstrijdId = "1";
-        // DB::table('wedstrijd')->where('is_active','=', '1');
+
+        $wedstrijdId = wedstrijd::where('is_active', 0)->get();
+
         return view('inschrijving.inschrijving', compact('wedstrijdId'));
     }
 
-    public function store(Request $request, InschrijvingRequest $inschrijfrequest)
+    public function store(Request $request, InschrijvingRequest $inschrijfrequest, Session $session)
     {
+        $wedstrijdID = $request->input('wedstrijdId');
+        $deelnemerIP = \Request::ip();
         //checke of de method post is
         $method = $request->method();
-        if ($request->isMethod('post')) {
-            $deelnemer = new Deelnemer();
-            $wedstrijdId = $request->input('wedstrijd_id');
+
+        if (!Deelnemer::where('ip', '=', $deelnemerIP)->exists()) {
+
             try {
-                // $decrypted = decrypt($wedstrijdId);
+                $deelnemer = new Deelnemer();
+
+
+                $decrypted = Crypt::decrypt($wedstrijdID);
                 //$deelnemer->wedstrijd_id = Crypt::decrypt($wedstrijdId);
-                $deelnemer->wedstrijd_id = decrypt($wedstrijdId);
+
+                $deelnemer->wedstrijd_id = $decrypted;
                 $deelnemer->firstname = $inschrijfrequest->firstname;
                 $deelnemer->lastname = $inschrijfrequest->lastname;
                 $deelnemer->email = $inschrijfrequest->email;
                 $deelnemer->street = $inschrijfrequest->street;
                 $deelnemer->streetnumber = $inschrijfrequest->streetnumber;
                 $deelnemer->postcode = $inschrijfrequest->postcode;
-                $deelnemer->disqualified = 0;
+                $deelnemer->qualified = 0;
                 $deelnemer->is_deleted = 0;
                 $deelnemer->question = $inschrijfrequest->question;
-                $deelnemer->ip = $inschrijfrequest->ip;
-                return view('inschrijving.inschrijving');
+                $deelnemer->ip = $deelnemerIP;
+                $deelnemer->save();
+                return view('inschrijving.bevestiging');
             } catch (DecryptException $e) {
                 //
 
+                $request->session()->flash('flash_message', 'Fout tijdens het decrypteren');
+
             }
 
+        } else {
+
+            $request->session()->flash('flash_message', 'U  hebt al meegedaan');
         }
 
     }

@@ -5,12 +5,21 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-offset-2 col-lg-10 col-md-offset-2 col-md-10 col-sm-12">
-                {!! Form::open(array('url'=>'inschrijving/store','id'=>'formInschrijving')) !!}
                 <div class="breadcrumb col-lg-4 col-md-4">
 
                     <a href="{{ route('homepage') }}"><- ga terug</a>
 
+                    <br>
+                    <br>
+
+                    @if(Session::has('flash_message'))
+                        <div class="alert alert-danger">
+                            {{Session::get('flash_message')}}
+                        </div>
+                    @endif
                 </div>
+                {!! Form::open(array('action'=>'InschrijvingController@store','id'=>'formInschrijving')) !!}
+
                 <div class="clearfix "></div>
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
@@ -22,7 +31,7 @@
                         </ul>
                     </div>
                 @endif
-                {{ Form::hidden('wedstrijdId', Crypt::encrypt($wedstrijdId)) }}
+                {{ Form::hidden('wedstrijdId', encrypt( $wedstrijdId[0]->id )) }}
                 {{ csrf_field() }}
                 <div class="form-group inputss">
                     {!! Form::label('firstname', 'Voornaam',['class'=> 'col-md-5 control-label controle'])  !!}
@@ -52,9 +61,9 @@
                     </div>
                 </div>
                 <div class="form-group inputss">
-                    {!! Form::label('gemeente', 'Gemeente',['class'=> 'col-md-5 control-label'])  !!}
+                    {!! Form::label('postcode', 'Postcode',['class'=> 'col-md-5 control-label'])  !!}
                     <div class="col-md-7 ">
-                        {!! Form::text('gemeente', null, ['class' => 'form-control inputsField']) !!}
+                        {!! Form::number('postcode', null, ['class' => 'form-control inputsField']) !!}
                     </div>
                 </div>
                 <div class="form-group inputss">

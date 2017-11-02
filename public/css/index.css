@@ -173,15 +173,21 @@ a {
 }
 
 #lijst {
+    margin-top: 1%;
     background-color: #cd163a;
     height: 450px;
 }
 
 #lijstWinnaars {
-    float: left;
+
     margin-top: 2%;
+    margin-right: 0;
+    padding-right: 0;
 }
 
+.winnaarslijst ul li {
+    color: black;
+}
 #calltoAction {
     margin-left: 8%;
     margin-top: 4%;

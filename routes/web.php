@@ -22,7 +22,7 @@ Route::get('/inschrijvingspagina', 'InschrijvingController@index')
 Route::get('/redirect', 'SocialAuthFacebookController@redirect');
 Route::get('/callback', 'SocialAuthFacebookController@callback');
 Route::post('/inschrijving/store', 'InschrijvingController@store');
-Route::resource('inschrijving', 'InschrijvingController');
+//Route::resource('inschrijving', 'InschrijvingController');
 
 /*
 /Authenticated group
