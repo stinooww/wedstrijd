@@ -20,12 +20,16 @@ class InschrijvingController extends Controller
 
         $wedstrijdId = wedstrijd::where('is_active', 0)->get();
 
-        return view('inschrijving.inschrijving', compact('wedstrijdId'));
+//        $gameID = $wedstrijdId[0]->id;
+        $encryptedGameId = encrypt($wedstrijdId[0]->id);
+        echo $encryptedGameId;
+        return view('inschrijving.inschrijving', compact('encryptedGameId'));
     }
 
+    //store function controleert of ip uniek is en controleert vervolgens via request de input alvorens deelnemr aante make
     public function store(Request $request, InschrijvingRequest $inschrijfrequest, Session $session)
     {
-        $wedstrijdID = $request->input('wedstrijdId');
+        $wedstrijdID = $request->input('encryptedGameId');
         $deelnemerIP = \Request::ip();
         //checke of de method post is
         $method = $request->method();
@@ -56,12 +60,13 @@ class InschrijvingController extends Controller
                 //
 
                 $request->session()->flash('flash_message', 'Fout tijdens het decrypteren');
-
+                return view('inschrijving.inschrijving');
             }
 
         } else {
-
             $request->session()->flash('flash_message', 'U  hebt al meegedaan');
+            return view('inschrijving.inschrijving');
+
         }
 
     }

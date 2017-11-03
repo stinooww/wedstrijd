@@ -31,7 +31,7 @@
                         </ul>
                     </div>
                 @endif
-                {{ Form::hidden('wedstrijdId', encrypt( $wedstrijdId[0]->id )) }}
+                {{ Form::hidden('encryptedGameId', $encryptedGameId) }}
                 {{ csrf_field() }}
                 <div class="form-group inputss">
                     {!! Form::label('firstname', 'Voornaam',['class'=> 'col-md-5 control-label controle'])  !!}
