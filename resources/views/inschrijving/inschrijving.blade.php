@@ -11,17 +11,17 @@
 
                     <br>
                     <br>
-
+                    @include("feedback.session")
+                    @include("feedback.error")
 
                 </div>
-                @include("feedback.session")
-                @include("feedback.error")
+
                 <div class="clearfix "></div>
                 {!! Form::open(array('action'=>'InschrijvingController@store','id'=>'formInschrijving')) !!}
 
 
 
-                {{ Form::hidden('encryptedGameId', $encryptedGameId) }}
+                {{ Form::hidden('encryptedWedstrijdid', $encryptedGameId) }}
                 {{ csrf_field() }}
                 <div class="form-group inputss">
                     {!! Form::label('firstname', 'Voornaam',['class'=> 'col-md-5 control-label controle'])  !!}

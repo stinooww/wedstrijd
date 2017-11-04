@@ -11,13 +11,15 @@ class WedstrijdController extends Controller
 {
     public function index()
     {
-        if (Wedstrijd::all()) {
+
             $actieve_wedstrijd = Wedstrijd::where('is_active', 1)->get();
-        }
+
+        //  $new = $actieve_wedstrijd->id;
 
 
-        $wedstrijd = Wedstrijd::find(1);
-        return view("wedstrijd.wedstrijd", compact('actieve_wedstrijd', 'wedstrijd'));
+        $wedstrijdId = Wedstrijd::first();
+//echo $wedstrijdId;
+        return view("wedstrijd.wedstrijd", compact('actieve_wedstrijd', 'wedstrijdId'));
 
     }
 

@@ -4,13 +4,13 @@
 
     @if (Auth::check())
 
-        <div>
+        <div class="dashboard col-md-4 col-md-offset-4">
             <ul>
                 <li class="col-lg-5 col-md-5 col-sm-12">
                     <a href="{{ route('deelnemerspagina') }}">
                         Deeelnemerslijst </a></li>
                 <li class="col-lg-5 col-md-5 col-sm-12">
-                    <a href="{{ route('verantwoordelijkelijst') }}">
+                    <a href="{{ route('adminindex') }}">
 
                         wedstrijd verantwoordelijkelijst</a></li>
 
@@ -18,7 +18,7 @@
                     <a href="{{ route('wedstrijdindex') }}">
                         Stel een wedstrijd in</a>
                 </li>
-                <li></li>
+                {{--<li></li>--}}
             </ul>
         </div>
 

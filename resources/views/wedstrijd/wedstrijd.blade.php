@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-offset-2 col-lg-10 col-md-offset-2 col-md-10 col-sm-12">
-                @if($wedstrijd)
+
 
                     <div class="breadcrumb col-lg-4 col-md-4">
 
@@ -17,7 +17,7 @@
                     </div>
                     @include("feedback.session")
                     @include("feedback.error")
-
+                @if($actieve_wedstrijd)
                     <div class="clearfix "></div>
 
                     <section class="wedstrijd">
@@ -26,16 +26,16 @@
                             <br> Als je de vraag juist hebt beantwoord zal je worden verwittigd per e-mail! </p>
 
 
-                        @if(count( $actieve_wedstrijd) > 0)
+
                             <div class="col-md-6 col-md-offset-3">
-                                <h2>Huidige wedstrijd</h2>
-                                @foreach($actieve_wedstrijd as $wedstrijd)
-                                    <p>Wedstrijdnaam: {{ $wedstrijd->name }}</p>
-                                    <p>Start datum: {{ $wedstrijd->start_date }}</p>
-                                    <p>Eind datum: {{ $wedstrijd->end_date }}</p>
+                                <h3>Huidige wedstrijd</h3>
+                                @foreach($actieve_wedstrijd as $activeGame)
+                                    <p>Wedstrijdnaam: {{ $activeGame->name }}</p>
+                                    <p>Start datum: {{ $activeGame->start_date }}</p>
+                                    <p>Eind datum: {{ $activeGame->end_date }}</p>
                                 @endforeach
                             </div>
-                        @endif
+
 
                     </section>
 
@@ -49,22 +49,21 @@
 
                         @if(Auth::check())
                             <div class="col-sm-4 text-center">
-                                <a class="btn btnLarge" href="{{ route('editwedstrijd',$actieve_wedstrijd->id) }}">Wedstrijd
+                                <a class="btn btnLarge" href="{{ route('geteditwedstrijd',$wedstrijdId->id) }}">Wedstrijd
                                     aanpassen</a>
                             </div>
-
                         @endif
-
-
                         @else
-                            @if(Auth::check())
 
+                            @if(Auth::check())
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <a class="btn btnLarge" href="{{ route('createwedstrijd') }}">Wedstrijd aanmaken</a>
+                                    <a class="btn btnLarge" href="{{ route('getcreatewedstrijd') }}">Wedstrijd
+                                        aanmaken</a>
                                 </div>
 
                             @endif
                         @endif
+
                     </div>
 
             </div>

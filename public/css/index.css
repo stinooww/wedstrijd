@@ -102,9 +102,17 @@ a {
 }
 
 #menu li a {
-    font-size: larger;
+
     text-decoration: none;
+
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: normal;
     color: white;
+    text-transform: uppercase;
+    text-rendering: optimizelegibility;
 }
 
 #menu li a:hover {
@@ -226,4 +234,20 @@ a {
 
 .form-group {
     margin-top: 5%;
+}
+
+.wedstrijd p {
+    color: #cd163a;
+}
+
+.dashboard {
+    margin-top: 5%;
+
+}
+
+.dashboard ul li {
+    float: left;
+    text-decoration: none;
+
+    padding: 2%;
 }

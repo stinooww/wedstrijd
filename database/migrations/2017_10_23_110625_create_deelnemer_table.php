@@ -22,7 +22,7 @@ class CreateDeelnemerTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('street');
-            $table->string('streetnumber');
+            $table->string('housenumber');
             $table->integer('postcode');
             $table->string('email');
             $table->string('question');

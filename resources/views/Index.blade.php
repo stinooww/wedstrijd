@@ -48,6 +48,9 @@
                                     {{ csrf_field() }}
                                 </form>
                             </li>
+                            <li>
+                                <a href="{{route('dashboard')}}">Dashboard</a>
+                            </li>
                         @else
                             <li class="login">
                                 <a href="{{ url('/login') }}">Login</a>

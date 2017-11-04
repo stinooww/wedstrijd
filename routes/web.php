@@ -26,28 +26,40 @@ Auth::routes();
 
 //Route::get('/admin/home', 'AdminController@show')
 //->name('adminpagina');
-Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
-    Route::get('/home', 'AdminController@show')->name('adminpagina');
 
-    Route::put('/verantwoordelijke-edit', 'AdminController@editVerantwoordelijke')->name('verantwoordelijke');
-    Route::post('/verantwoordelijke-create', 'AdminController@storeVerantwoordelijke')->name('verantwoordelijkeCreate');
 
-});
-
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard')->middleware('auth');
+Route::get('/dashboard/home', 'AdminController@index')->name('dashboard')->middleware('auth');
 
 
 // wedstrijd
 Route::group(['prefix' => '/wedstrijd', 'middleware' => 'auth'], function () {
+    Route::get('/create', 'WedstrijdController@create')->name('getcreatewedstrijd');
     Route::post('/create', 'WedstrijdController@create')->name('createwedstrijd');
+    Route::get('/edit/{id}', 'WedstrijdController@create')->name('geteditwedstrijd');
     Route::patch('/edit/{id}', 'WedstrijdController@edit')->name('editwedstrijd');
 });
 
 // deelnemers
 Route::group(['prefix' => '/deelnemers', 'middleware' => 'auth'], function () {
     Route::get('/show', 'DeelnemerController@index')->name('deelnemerspagina');
-    Route::patch('/edit', 'DeelnemerController@edit')->name('editdeelnemerspagina');
+    Route::patch('/edit', 'DeelnemerController@edit')->name('editdeelnemer');
 });
+
+//verantwoordelijke
+Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
+
+    Route::get('/show', 'AdminController@show')->name('adminindex');
+    Route::post('/edit', 'AdminController@create')->name('admincreate');
+    Route::post('/create', 'AdminController@update')->name('adminupdate');
+
+});
+
+
+
+
+
+
+
 
 
 // -----------CONFIG-----------

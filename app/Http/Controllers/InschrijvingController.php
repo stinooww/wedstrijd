@@ -22,7 +22,7 @@ class InschrijvingController extends Controller
 
 //        $gameID = $wedstrijdId[0]->id;
         $encryptedGameId = encrypt($wedstrijdId[0]->id);
-        echo $encryptedGameId;
+        //  echo $encryptedGameId;
         return view('inschrijving.inschrijving', compact('encryptedGameId'));
     }
 
@@ -59,7 +59,7 @@ class InschrijvingController extends Controller
                 } catch (DecryptException $e) {
                     //
 
-                    $request->session()->flash('flash_message', 'Fout tijdens het decrypteren');
+                    Session::flash('flash_message', 'Fout tijdens het decrypteren');
                     return view('inschrijving.inschrijving');
                 }
 
