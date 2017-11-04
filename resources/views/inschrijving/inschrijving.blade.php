@@ -12,25 +12,15 @@
                     <br>
                     <br>
 
-                    @if(Session::has('flash_message'))
-                        <div class="alert alert-danger">
-                            {{Session::get('flash_message')}}
-                        </div>
-                    @endif
+
                 </div>
+                @include("feedback.session")
+                @include("feedback.error")
+                <div class="clearfix "></div>
                 {!! Form::open(array('action'=>'InschrijvingController@store','id'=>'formInschrijving')) !!}
 
-                <div class="clearfix "></div>
-                @if (count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li> {{ $error }}</li>
-                            @endforeach
 
-                        </ul>
-                    </div>
-                @endif
+
                 {{ Form::hidden('encryptedGameId', $encryptedGameId) }}
                 {{ csrf_field() }}
                 <div class="form-group inputss">

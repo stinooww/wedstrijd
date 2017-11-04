@@ -33,41 +33,43 @@ class InschrijvingController extends Controller
         $deelnemerIP = \Request::ip();
         //checke of de method post is
         $method = $request->method();
+        if ($request->isMethod('POST')) {
+            if (!Deelnemer::where('ip', '=', $deelnemerIP)->exists()) {
 
-        if (!Deelnemer::where('ip', '=', $deelnemerIP)->exists()) {
-
-            try {
-                $deelnemer = new Deelnemer();
+                try {
+                    $deelnemer = new Deelnemer();
 
 
-                $decrypted = Crypt::decrypt($wedstrijdID);
-                //$deelnemer->wedstrijd_id = Crypt::decrypt($wedstrijdId);
+                    $decrypted = Crypt::decrypt($wedstrijdID);
+                    //$deelnemer->wedstrijd_id = Crypt::decrypt($wedstrijdId);
 
-                $deelnemer->wedstrijd_id = $decrypted;
-                $deelnemer->firstname = $inschrijfrequest->firstname;
-                $deelnemer->lastname = $inschrijfrequest->lastname;
-                $deelnemer->email = $inschrijfrequest->email;
-                $deelnemer->street = $inschrijfrequest->street;
-                $deelnemer->streetnumber = $inschrijfrequest->streetnumber;
-                $deelnemer->postcode = $inschrijfrequest->postcode;
-                $deelnemer->qualified = 0;
-                $deelnemer->is_deleted = 0;
-                $deelnemer->question = $inschrijfrequest->question;
-                $deelnemer->ip = $deelnemerIP;
-                $deelnemer->save();
-                return view('inschrijving.bevestiging');
-            } catch (DecryptException $e) {
-                //
+                    $deelnemer->wedstrijd_id = $decrypted;
+                    $deelnemer->firstname = $inschrijfrequest->firstname;
+                    $deelnemer->lastname = $inschrijfrequest->lastname;
+                    $deelnemer->email = $inschrijfrequest->email;
+                    $deelnemer->street = $inschrijfrequest->street;
+                    $deelnemer->streetnumber = $inschrijfrequest->streetnumber;
+                    $deelnemer->postcode = $inschrijfrequest->postcode;
+                    $deelnemer->qualified = 0;
+                    $deelnemer->is_deleted = 0;
+                    $deelnemer->question = $inschrijfrequest->question;
+                    $deelnemer->ip = $deelnemerIP;
+                    $deelnemer->save();
+                    return view('inschrijving.bevestiging');
+                } catch (DecryptException $e) {
+                    //
 
-                $request->session()->flash('flash_message', 'Fout tijdens het decrypteren');
+                    $request->session()->flash('flash_message', 'Fout tijdens het decrypteren');
+                    return view('inschrijving.inschrijving');
+                }
+
+            } else {
+                $request->session()->flash('flash_message', 'U  hebt al meegedaan');
                 return view('inschrijving.inschrijving');
+
             }
 
-        } else {
-            $request->session()->flash('flash_message', 'U  hebt al meegedaan');
-            return view('inschrijving.inschrijving');
-
         }
-
+        return view('inschrijving.inschrijving');
     }
 }

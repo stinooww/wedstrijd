@@ -18,7 +18,7 @@ class SendDailyEntriesExport extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Stuurt elke dag een deelnemerslijst naar de wedstrijdverantwoorelijke';
 
     /**
      * Create a new command instance.
@@ -38,5 +38,6 @@ class SendDailyEntriesExport extends Command
     public function handle()
     {
         //
+        return app('App\Http\Controllers\ParticipantController')->SendAutoMail();
     }
 }

@@ -27,10 +27,7 @@ class LoginController extends Controller
      * @var string
      */
     //  protected $redirectTo = 'adminpagina';    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -40,7 +37,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($user->isAdmin()) {// do your margic here
-            return redirect()->route('adminpagina');
+            return redirect()->route('dashboard');
         }
 
         return redirect('/home');

@@ -15,7 +15,7 @@
                         wedstrijd verantwoordelijkelijst</a></li>
 
                 <li class="col-lg-5 col-md-5 col-sm-12">
-                    <a href="{{ route('wedstrijd') }}">
+                    <a href="{{ route('wedstrijdindex') }}">
                         Stel een wedstrijd in</a>
                 </li>
                 <li></li>

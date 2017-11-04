@@ -29,9 +29,11 @@
                 <ul id="menu">
 
                     <li>
-                        <a href="/home">Home</a>
+                        <a href="{{ route('homepage') }}">Home</a>
                     </li>
-
+                    <li>
+                        <a href="{{ route('wedstrijdindex') }}">Wedstrijd</a>
+                    </li>
 
                     <div id="login">
                         @if (Auth::check())
