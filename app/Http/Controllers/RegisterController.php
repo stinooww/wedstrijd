@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 use League\Flysystem\Exception;
 
 
-class InschrijvingController extends Controller
+class RegisterController extends Controller
 {
     //geen auth nodig gezien iedereen deze pagina kan bezoeken
 
@@ -19,9 +19,9 @@ class InschrijvingController extends Controller
     {
 
         $wedstrijdId = wedstrijd::where('is_active', 1)->get();
-
+//dd($wedstrijdId);
         $wedstrijdId = $wedstrijdId[0]->id;
-        // echo($wedstrijdId);
+        //  dd($wedstrijdId);
 
 //        $gameID = $wedstrijdId[0]->id;
         // $encryptedGameId = encrypt($wedstrijdId[0]->id);
@@ -33,11 +33,12 @@ class InschrijvingController extends Controller
     public function store(Request $request, InschrijvingRequest $inschrijfrequest, Session $session)
     {
         $wedstrijdId = wedstrijd::where('is_active', 1)->get();
+        //    dd($wedstrijdId);
         $gameID = $wedstrijdId[0]->id;
 //        $gameID = $wedstrijdId[0]->id;
         // $encryptedGameId = Crypt::encrypt($wedstrijdId[0]->id);
 
-        $wedstrijdID = $request->input('encryptedGameId');
+        // $wedstrijdID = $request->input('encryptedGameId');
         $deelnemerIP = \Request::ip();
         //checke of de method post is
         $method = $request->method();
@@ -68,7 +69,7 @@ class InschrijvingController extends Controller
                     return view('inschrijving.bevestiging');
                 } catch (Exception $e) {
                     //
-                    // u can handle it from here? hij wordt nu al niemeer ge"errort :), ik had nog een ander vraaggje.. heb je nog tijhd of ni?
+
 
                     Session::flash('flash_message', 'Fout tijdens het decrypteren');
                     return view('inschrijving.inschrijving', compact('encryptedGameId'));
@@ -81,6 +82,6 @@ class InschrijvingController extends Controller
             }
 
         }
-        return view('inschrijving.inschrijving');
+        return view('inschrijving.inschrijving', compact('wedstrijdId'));
     }
 }

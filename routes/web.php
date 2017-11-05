@@ -7,13 +7,13 @@ Route::get('/', 'HomeController@show')
     ->name('homepage');
 
 Route::get('/home', 'HomeController@show');
-Route::get('/inschrijvingspagina', 'InschrijvingController@index')
+Route::get('/inschrijving/inschrijving', 'RegisterController@index')
     ->name('inschrijvingspagina');
-Route::get('/redirect', 'SocialAuthFacebookController@redirect');
-Route::get('/callback', 'SocialAuthFacebookController@callback');
-Route::post('/inschrijving/store', 'InschrijvingController@store');
-//Route::resource('inschrijving', 'InschrijvingController');
-Route::get('/wedstrijd/wedstrijd', 'WedstrijdController@index')->name('wedstrijdindex');
+//Route::get('/redirect', 'SocialAuthFacebookController@redirect');
+//Route::get('/callback', 'SocialAuthFacebookController@callback');
+Route::post('/inschrijving/store', 'RegisterController@store');
+
+Route::get('/wedstrijd/wedstrijd', 'GameController@index')->name('wedstrijdindex');
 
 
 
@@ -33,26 +33,28 @@ Route::get('/dashboard/home', 'AdminController@index')->name('dashboard')->middl
 
 // wedstrijd
 Route::group(['prefix' => '/wedstrijd', 'middleware' => 'auth'], function () {
-    Route::get('/create', 'WedstrijdController@create')->name('getcreatewedstrijd');
-    Route::post('/create', 'WedstrijdController@create')->name('createwedstrijd');
 
+    Route::get('/create', 'GameController@create')->name('createwedstrijd');
+    Route::post('/create', 'GameController@create')->name('createwedstrijd');
+    Route::get('/edit/{id}', 'GameController@edit')->name('editwedstrijd');
+    Route::post('/edit/{id}', 'GameController@edit')->name('editwedstrijd');
 });
-Route::get('/wedstrijd/edit/{id}', 'WedstrijdController@edit')->name('editwedstrijd');
-Route::post('/wedstrijd/edit/{id}', 'WedstrijdController@edit')->name('editwedstrijd');
+
 
 // deelnemers
 Route::group(['prefix' => '/deelnemers', 'middleware' => 'auth'], function () {
-    Route::get('/show', 'DeelnemerController@index')->name('deelnemerspagina');
-    Route::get('/edit/{id}', 'DeelnemerController@edit')->name('editdeelnemer');
-    Route::post('/edit/{id}', 'DeelnemerController@edit')->name('editdeelnemer');
+    Route::get('/show', 'ParticipantController@index')->name('deelnemerspagina');
+    Route::get('/edit/{id}', 'ParticipantController@edit')->name('editdeelnemer');
+    Route::post('/edit/{id}', 'ParticipantController@edit')->name('editdeelnemer');
 });
 
 //verantwoordelijke
 Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
 
     Route::get('/show', 'AdminController@show')->name('adminindex');
-    Route::post('/edit', 'AdminController@create')->name('admincreate');
-    Route::post('/create', 'AdminController@update')->name('adminupdate');
+    Route::get('/edit/{id}', 'AdminController@update')->name('adminupdate');
+    Route::post('/edit/{id}', 'AdminController@update')->name('adminupdate');
+//    Route::post('/create', 'AdminController@update')->name('adminupdate');
 
 });
 

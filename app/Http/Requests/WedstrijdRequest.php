@@ -25,7 +25,7 @@ class WedstrijdRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required,alpha,min:2',
+            'name' => 'required|min:2',
             'start_date' => 'date',
             'end_date' => 'date',
             'is_active' => 'boolean',

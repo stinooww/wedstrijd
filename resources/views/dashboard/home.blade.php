@@ -8,7 +8,7 @@
             <ul>
                 <li class="col-lg-5 col-md-5 col-sm-12">
                     <a href="{{ route('deelnemerspagina') }}">
-                        Deeelnemerslijst </a></li>
+                        Deelnemerslijst </a></li>
                 <li class="col-lg-5 col-md-5 col-sm-12">
                     <a href="{{ route('adminindex') }}">
 

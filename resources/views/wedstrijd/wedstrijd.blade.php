@@ -17,7 +17,7 @@
                     </div>
                     @include("feedback.session")
                     @include("feedback.error")
-                @if($actieve_wedstrijd)
+                @if($wedstrijdID)
                     <div class="clearfix "></div>
 
                     <section class="wedstrijd">
@@ -50,7 +50,7 @@
 
                         @if(Auth::check())
                             <div class="col-sm-4 text-center">
-                                <a class="btn btnLarge" href="{{ route('editwedstrijd',$wedstrijdId->id) }}">Wedstrijd
+                                <a class="btn btnLarge" href="{{ route('editwedstrijd',$wedstrijdID->id) }}">Wedstrijd
                                     aanpassen</a>
                             </div>
                         @endif
@@ -58,7 +58,7 @@
 
                             @if(Auth::check())
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <a class="btn btnLarge" href="{{ route('getcreatewedstrijd') }}">Wedstrijd
+                                    <a class="btn btnLarge" href="{{ route('createwedstrijd') }}">Wedstrijd
                                         aanmaken</a>
                                 </div>
 

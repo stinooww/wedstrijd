@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="clearfix "></div>
-                {!! Form::open(array('action'=>'InschrijvingController@store','id'=>'formInschrijving')) !!}
+                {!! Form::open(array('action'=>'RegisterController@store','id'=>'formInschrijving')) !!}
 
 
 

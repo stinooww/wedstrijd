@@ -21,8 +21,8 @@
                 <section class="wedstrijd">
 
 
-                    <h2 class="text-center">Wedstrijd nr: {{ $actieve_wedstrijd->id }} aanpassen</h2>
-                    {!! Form::model(array('route' => 'editwedstrijd','class' => 'form-horizontal',$actieve_wedstrijd->id)) !!}
+                    <h2 class="text-center">Wedstrijd nr: {{ $wedstrijdId->id }} aanpassen</h2>
+                    {!! Form::model(array('route' => 'editwedstrijd','class' => 'form-horizontal',$wedstrijdId->id)) !!}
                     {{ csrf_field() }}
 
                     <div class="form-group inputss">

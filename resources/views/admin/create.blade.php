@@ -5,6 +5,10 @@
     @if (Auth::check())
 
 
+
+
+
+
     @endif
 
 

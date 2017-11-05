@@ -6,20 +6,24 @@ use App\Http\Requests\WedstrijdRequest;
 use App\User;
 use App\Wedstrijd;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class WedstrijdController extends Controller
+class GameController extends Controller
 {
     public function index()
     {
-
+        if (Wedstrijd::all()) {
             $actieve_wedstrijd = Wedstrijd::where('is_active', 1)->get();
+            // dd($actieve_wedstrijd->id);
+        }
 
+        $wedstrijd = Wedstrijd::find(1);
         //  $new = $actieve_wedstrijd->id;
-
-        $wedstrijdId = Wedstrijd::first();
-//echo $wedstrijdId;
-        return view("wedstrijd.wedstrijd", compact(['actieve_wedstrijd', 'wedstrijdId']));
+//dd($wedstrijd);
+        $wedstrijdID = Wedstrijd::first();
+//dd( $wedstrijdID->id);
+        return view("wedstrijd.wedstrijd", compact('actieve_wedstrijd', 'wedstrijdID'));
 
     }
 
@@ -27,7 +31,7 @@ class WedstrijdController extends Controller
     {
         $userid = Auth::id();
         $role = User::where('id', '=', $userid)->get();
-        if ($role[0]->role_id == 1) {
+        if ($role[0]->role_id == 2) {
             if ($request->isMethod('POST')) {
 
 
@@ -41,17 +45,18 @@ class WedstrijdController extends Controller
                 Session::flash('success', 'Wedstrijd toegevoegd');
 
             }
-            return view('wedstrijd.wedstrijd');
+            return view('wedstrijd.create');
         }
+        return view('wedstrijd.create');
     }
 
-    public function edit(Request $request, WedstrijdRequest $wedstrijdRequest, $id)
+    public function edit(Request $request, WedstrijdRequest $wedstrijdRequest, $wedstrijdID)
     {
 
-        $actieve_wedstrijd = Wedstrijd::where('is_active', 1)->get();
-
+        $actieveGame = Wedstrijd::where('is_active', 1)->get();
+        $wedstrijdId = Wedstrijd::first();
         //  $new = $actieve_wedstrijd->id;
-
+        dd($wedstrijdId);
         $wedstrijd = Wedstrijd::find(1);
         if ($request->isMethod('POST')) {
 
@@ -63,7 +68,8 @@ class WedstrijdController extends Controller
             $wedstrijd->save();
             Session::flash('success', 'Wedstrijd aangepast');
         }
-        return view("wedstrijd.edit", compact(['actieve_wedstrijd', 'wedstrijdId']));
+
+        return view("wedstrijd.edit", compact('$actieveGame', 'wedstrijdID'));
 
 
 
