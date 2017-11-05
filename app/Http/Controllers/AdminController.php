@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,24 +46,29 @@ class AdminController extends Controller
         }
     }
 //    // wedstrijdverantwoordelijke instellen
-    public function update(Request $request, $id)
+    public function update(Request $request, AdminRequest $adminrequest, $id)
     {
+        $admin = User::findOrFail($id);
         $adminList = User::all();
         $activeAdmin = User::where('id', $id)->get();
         // dd($activeAdmin);
-        if ($request->isMethod('POST')) {
+        $userid = Auth::id();
+        $role = User::where('id', '=', $userid)->get();
+        if ($role[0]->role_id == 2) {
+            if ($request->isMethod('POST')) {
 
-            $activeAdmin->$request->input('name');
-            $activeAdmin->$request->input('email');
-            $activeAdmin->$request->input('role_id');
-            $activeAdmin->save();
-            Session::flash('success', 'Wedstrijd aangepast');
-            return view('admin.show', compact('adminList'));
-        } else {
-            Session::flash('danger', 'Wedstrijd niet aangepast');
+                $admin->name = $adminrequest->name;
+                $admin->email = $adminrequest->email;
+                $admin->role_id = $adminrequest->role_id;
+                $admin->save();
+                Session::flash('success', 'Wedstrijd aangepast');
+                return view('admin.show', compact('adminList'));
+            } else {
+                Session::flash('danger', 'Wedstrijd niet aangepast');
+            }
         }
 
-        return view('admin.edit', compact('id'));
+        return view('admin.edit', compact('admin'));
 
     }
 

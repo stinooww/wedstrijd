@@ -22,21 +22,23 @@
                 <section class="wedstrijd">
 
 
-                    <h2 class="text-center">Admin nr: {{ $id }} aanpassen</h2>
+                    <h2 class="text-center">Admin nr: {{ $admin ->id }} aanpassen</h2>
 
-                    {!! Form::model(array('route' => 'editwedstrijd','class' => 'form-horizontal',$id)) !!}
+                    {!! Form::model(array('route' => 'editwedstrijd','class' => 'form-horizontal',$admin ->id )) !!}
                     {{ csrf_field() }}
                     {{ method_field('POST') }}
                     <div class="form-group inputss">
                         {!! Form::label('name', 'Admin name',['class'=> 'col-md-5 control-label controle'])  !!}
                         <div class="col-md-7 ">
-                            {!! Form::text('name', null, ['class' => 'form-control inputsField']) !!}
+                            <input type="text" class="form-control" name="name"
+                                   value="{{$admin->name}}">
                         </div>
                     </div>
                     <div class="form-group inputss">
                         {!! Form::label('email', 'Email',['class'=> 'col-md-5 control-label controle'])  !!}
                         <div class="col-md-7 ">
-                            {!! Form::text('email', null, ['class' => 'form-control inputsField']) !!}
+                            <input type="text" class="form-control" name="email"
+                                   value="{{$admin->email}}">
                         </div>
                     </div>
                     <div class="form-group inputss">
