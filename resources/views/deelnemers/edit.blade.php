@@ -23,8 +23,8 @@
 
 
                     {!! Form::open(array(route('editdeelnemer',$deelnemer->id) ,'class' => 'form-horizontal')) !!}
-                    <div class="col-sm-6">
-                        <div class="col-sm-5 col-sm-offset-1 pull-right">
+                    <div class="col-md-6">
+                        <div class="col-md-6 ">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 {{ Form::label('firstname', 'Voornaam', array('class' => 'control-label pull-left')) }}
@@ -41,18 +41,31 @@
                                 {{ Form::label('email', 'Email', array('class' => 'control-label pull-left')) }}
                                 <input type="text" class="form-control" name="email" value="{{$deelnemer->email}}">
                             </div>
+                            <div class="form-group ">
+                                {!! Form::label('is_deleted', 'Verwijderen',['class'=> 'col-md-5 control-label controle'])  !!}
+                                <div class="col-md-5">
+                                    {!! Form::select('is_deleted', array('1' => 'Ja', '0' => 'Nee'), '0', ['class' => 'form-control inputsField']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                {!! Form::label('qualified', 'Disqualificren',['class'=> 'col-md-5 control-label controle'])  !!}
+                                <div class="col-md-5 ">
+                                    {!! Form::select('qualified', array('1' => 'Ja', '0' => 'Nee'), '0', ['class' => 'form-control inputsField']) !!}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="col-sm-5 col-sm-offset-1">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 {{ Form::label('street', 'Straatnaam', array('class' => 'control-label pull-left')) }}
-                                <input type="text" class="form-control" name="street" value="{{$deelnemer->street}}">
+                                <input type="text" class="form-control" name="street"
+                                       value="{{$deelnemer->streetname}}">
                             </div>
                             <div class="form-group">
                                 {{ Form::label('housenumber', 'Nummer', array('class' => 'control-label pull-left')) }}
                                 <input type="text" class="form-control" name="housenumber"
-                                       value="{{$deelnemer->housenumber}}">
+                                       value="{{$deelnemer->streetnumber}}">
                             </div>
                             <div class="form-group">
                                 {{ Form::label('postcode', 'Postcode', array('class' => 'control-label pull-left')) }}
@@ -65,20 +78,13 @@
                                 <input type="text" class="form-control" name="question"
                                        value="{{$deelnemer->question}}">
                             </div>
-                            <div class="hidden">
-                                {{ Form::label('ipadress', 'ipadress', array('class' => '' )) }}
-                                <input type="text" class="hidden" name="ipadress" value="{{$deelnemer->ipadress}}">
-                            </div>
+
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            {{ Form::label('has_permission', 'Maakt kans om te winnen', array('class' => 'control-label' )) }}
-                            {{ Form::checkbox('has_permission', 'has_permission',array('class' => 'control-label')) }}
-                        </div>
-                    </div>
+
+
                     <div class="form-group">
-                        {{ Form::submit('aanpassen', array('class' => 'btn btn-primary')) }}
+                        {{ Form::submit('aanpassen', array('class' => 'btn btnLarge')) }}
                     </div>
                     {!! Form::close() !!}
 

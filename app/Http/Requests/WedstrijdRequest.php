@@ -25,7 +25,7 @@ class WedstrijdRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|min:2',
+            'name.required' => 'de wedstrijdnaam is verplicht',
             'start_date' => 'date',
             'end_date' => 'date',
             'is_active' => 'boolean',

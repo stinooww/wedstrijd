@@ -34,7 +34,7 @@
                                     <p>Wedstrijdnaam: {{ $activeGame->name }}</p>
                                     <p>Start datum: {{ $activeGame->start_date }}</p>
                                     <p>Eind datum: {{ $activeGame->end_date }}</p>
-                                @endforeach
+
                             </div>
 
 
@@ -50,10 +50,11 @@
 
                         @if(Auth::check())
                             <div class="col-sm-4 text-center">
-                                <a class="btn btnLarge" href="{{ route('editwedstrijd',$wedstrijdID->id) }}">Wedstrijd
+                                <a class="btn btnLarge" href="{{ route('editwedstrijd',$activeGame->id) }}">Wedstrijd
                                     aanpassen</a>
                             </div>
                         @endif
+                        @endforeach
                         @else
 
                             @if(Auth::check())

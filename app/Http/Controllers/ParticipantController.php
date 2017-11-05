@@ -57,7 +57,7 @@ class ParticipantController extends Controller
                     Session::flash('danger', 'Deelnemer fout' . $exception);
                 }
             }
-            return view('editdeelnemer', compact('id'));
+            return view('deelnemers.edit', compact('deelnemer'));
         }
     }
 
@@ -99,7 +99,7 @@ class ParticipantController extends Controller
 
     public function SendWinningMail()
     {
-        Mail::send('mail.winningmail', [], function ($message) {
+        Mail::send('mail.email', [], function ($message) {
             $winnendeDeelnemer = Winnaar::with('deelnemer')->where('id', '=', 'deelnemer_id')->take(1)->get()->first();
             $message->to($winnendeDeelnemer->email)->subject('Proficiat u heeft gewonnen!');
         });

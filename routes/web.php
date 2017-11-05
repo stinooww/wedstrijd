@@ -36,8 +36,8 @@ Route::group(['prefix' => '/wedstrijd', 'middleware' => 'auth'], function () {
 
     Route::get('/create', 'GameController@create')->name('createwedstrijd');
     Route::post('/create', 'GameController@create')->name('createwedstrijd');
-    Route::get('/edit/{id}', 'GameController@edit')->name('editwedstrijd');
-    Route::post('/edit/{id}', 'GameController@edit')->name('editwedstrijd');
+    Route::get('/edit/{id}', 'GameController@update')->name('editwedstrijd');
+    Route::post('/edit/{id}', 'GameController@update')->name('editwedstrijd');
 });
 
 

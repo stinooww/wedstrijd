@@ -21,8 +21,8 @@
                 <section class="wedstrijd">
 
 
-                    <h2 class="text-center">Wedstrijd nr: {{ $wedstrijdId->id }} aanpassen</h2>
-                    {!! Form::model(array('route' => 'editwedstrijd','class' => 'form-horizontal',$wedstrijdId->id)) !!}
+                    <h2 class="text-center">Wedstrijd nr: {{ $wedstrijdId }} aanpassen</h2>
+                    {!! Form::model(array('route' => 'editwedstrijd','class' => 'form-horizontal',$wedstrijdId)) !!}
                     {{ csrf_field() }}
 
                     <div class="form-group inputss">
@@ -53,7 +53,7 @@
 
 
                     <div class="form-group">
-                        {{ Form::submit('submit', array('class' => 'btn btn-primary')) }}
+                        {{ Form::submit('submit', array('class' => 'btn btnLarge')) }}
                     </div>
 
 

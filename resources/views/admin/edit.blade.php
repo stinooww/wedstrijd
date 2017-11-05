@@ -23,9 +23,10 @@
 
 
                     <h2 class="text-center">Admin nr: {{ $id }} aanpassen</h2>
+
                     {!! Form::model(array('route' => 'editwedstrijd','class' => 'form-horizontal',$id)) !!}
                     {{ csrf_field() }}
-
+                    {{ method_field('POST') }}
                     <div class="form-group inputss">
                         {!! Form::label('name', 'Admin name',['class'=> 'col-md-5 control-label controle'])  !!}
                         <div class="col-md-7 ">
