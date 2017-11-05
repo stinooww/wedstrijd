@@ -26,7 +26,7 @@
 
 
                         <h3>Deelnemers:</h3>
-                        @if($deelnemerslijst)
+
                             @foreach($deelnemerslijst as $deelnemer )
                                 <div class="col-md-4">
                                     <ul class="list-group">
@@ -39,16 +39,16 @@
                                         <li class="list-group-item">Postcode: {{$deelnemer->postcode}} </li>
                                         <li class="list-group-item">
                                             Gedisqualificeerd: {{ $deelnemer->disqualified }}</li>
-                                        <li class="list-group-item">Soft delete: {{ $deelnemer->is_deleted }}</li>
+                                        <li class="list-group-item">Speler verwijderd: {{ $deelnemer->is_deleted }}</li>
                                         <li>
                                             <a class="btn btnLarge" href="{{ route('editdeelnemer', $deelnemer->id) }}">Deelnemer
-                                                aanpassen / verwijderen</a>
+                                                aanpassen </a>
                                         </li>
 
                                     </ul>
                                 </div>
                             @endforeach
-                        @endif
+                        {{--@endif--}}
 
                         {!! Form::open(array('route' => 'create_excel')) !!}
                         {{ Form::submit('Download Excel', array('class' => 'btn btn-primary pull-right')) }}

@@ -30,6 +30,7 @@
                             <div class="col-md-6 col-md-offset-3">
                                 <h3>Huidige wedstrijd</h3>
                                 @foreach($actieve_wedstrijd as $activeGame)
+                                    <p>Wedstrijdid: {{ $activeGame->id }}</p>
                                     <p>Wedstrijdnaam: {{ $activeGame->name }}</p>
                                     <p>Start datum: {{ $activeGame->start_date }}</p>
                                     <p>Eind datum: {{ $activeGame->end_date }}</p>
@@ -49,7 +50,7 @@
 
                         @if(Auth::check())
                             <div class="col-sm-4 text-center">
-                                <a class="btn btnLarge" href="{{ route('geteditwedstrijd',$wedstrijdId->id) }}">Wedstrijd
+                                <a class="btn btnLarge" href="{{ route('editwedstrijd',$wedstrijdId->id) }}">Wedstrijd
                                     aanpassen</a>
                             </div>
                         @endif

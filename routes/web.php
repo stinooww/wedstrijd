@@ -35,14 +35,16 @@ Route::get('/dashboard/home', 'AdminController@index')->name('dashboard')->middl
 Route::group(['prefix' => '/wedstrijd', 'middleware' => 'auth'], function () {
     Route::get('/create', 'WedstrijdController@create')->name('getcreatewedstrijd');
     Route::post('/create', 'WedstrijdController@create')->name('createwedstrijd');
-    Route::get('/edit/{id}', 'WedstrijdController@create')->name('geteditwedstrijd');
-    Route::patch('/edit/{id}', 'WedstrijdController@edit')->name('editwedstrijd');
+
 });
+Route::get('/wedstrijd/edit/{id}', 'WedstrijdController@edit')->name('editwedstrijd');
+Route::post('/wedstrijd/edit/{id}', 'WedstrijdController@edit')->name('editwedstrijd');
 
 // deelnemers
 Route::group(['prefix' => '/deelnemers', 'middleware' => 'auth'], function () {
     Route::get('/show', 'DeelnemerController@index')->name('deelnemerspagina');
-    Route::patch('/edit', 'DeelnemerController@edit')->name('editdeelnemer');
+    Route::get('/edit/{id}', 'DeelnemerController@edit')->name('editdeelnemer');
+    Route::post('/edit/{id}', 'DeelnemerController@edit')->name('editdeelnemer');
 });
 
 //verantwoordelijke
@@ -88,14 +90,14 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
 
 // --------EXCEL------------
 // -------------------------
-Route::post('competition/participants/excel', 'ParticipantController@DownloadExcel')
+Route::post('competition/participants/excel', 'DeelnemerController@DownloadExcel')
     ->name('create_excel')
-    ->middleware('auth');;
+    ->middleware('auth');
 // --------SEND MAIL---------
 // --------------------------
-Route::post('competition/participants/mail', 'ParticipantController@SendMail')
+Route::post('competition/participants/mail', 'DeelnemerController@SendMail')
     ->name('send_mail')
-    ->middleware('auth');;
+    ->middleware('auth');
 // --------PERMISSION-----------
 // -------------------------
 Route::get('/checkpermission', 'QuestionController@permission')

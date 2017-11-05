@@ -22,6 +22,8 @@
 
 
                 {{ Form::hidden('encryptedWedstrijdid', $encryptedGameId) }}
+
+
                 {{ csrf_field() }}
                 <div class="form-group inputss">
                     {!! Form::label('firstname', 'Voornaam',['class'=> 'col-md-5 control-label controle'])  !!}
@@ -39,9 +41,9 @@
                     </div>
                 </div>
                 <div class="form-group inputss">
-                    {!! Form::label('street', 'Straatnaam',['class'=> 'col-md-5 control-label'])  !!}
+                    {!! Form::label('streetname', 'Straatnaam',['class'=> 'col-md-5 control-label'])  !!}
                     <div class="col-md-7 ">
-                        {!! Form::text('street', null, ['class' => 'form-control inputsField']) !!}
+                        {!! Form::text('streetname', null, ['class' => 'form-control inputsField']) !!}
                     </div>
                 </div>
                 <div class="form-group inputss">

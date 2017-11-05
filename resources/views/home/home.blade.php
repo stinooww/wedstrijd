@@ -9,8 +9,8 @@
                 <div>
                     <h2>Wie wordt de nieuwe <span id="jupiler">Jupiler</span> winnaar??</h2>
 
-                    <p>Vul de super moeilijke vraag in met al je gegevens en maak kans op 5 meter bier .
-                        <br> Als je de vraag juist hebt beantwoord zal je worden verwittigd per e-mail! </p>
+                    <p>Doe mee aan onze shiftingsvraag en maak kans op 5 meter bier .
+                        <br> Beantwoord de vraag correct en je wordt verwittigd per e-mail! </p>
                 </div>
 
 

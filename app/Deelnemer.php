@@ -10,7 +10,7 @@ class Deelnemer extends Model
 
     protected $table = "deelnemer";
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'street', 'housenumber', 'postcode', 'disqualified', 'is_deleted', 'question'
+        'firstname', 'lastname', 'email', 'streetname', 'housenumber', 'postcode', 'disqualified', 'is_deleted', 'question'
     ];
 
     /**

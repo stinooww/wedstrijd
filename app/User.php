@@ -31,8 +31,23 @@ class User extends Authenticatable
         return $this->hasMany('App\wedstrijd');
     }
 
-    public function isAdmin()
+//    public function isAdmin()
+//    {
+//        return $this->admin; // this looks for an admin column in your users table
+//    }
+
+    public function is($roleName)
     {
-        return $this->admin; // this looks for an admin column in your users table
+        foreach ($this->role()->get() as $role) {
+            if ($role->name == $roleName) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function role()
+    {
+        return $this->hasOne('App\role');
     }
 }
