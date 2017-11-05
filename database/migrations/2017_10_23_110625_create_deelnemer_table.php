@@ -18,11 +18,10 @@ class CreateDeelnemerTable extends Migration
             $table->increments('id');
             $table->integer('wedstrijd_id')->unsigned();
             $table->foreign('wedstrijd_id')->references('id')->on('wedstrijd')->onDelete('cascade');
-
             $table->string('firstname');
             $table->string('lastname');
             $table->string('streetname');
-            $table->string('housenumber');
+            $table->string('streetnumber');
             $table->integer('postcode');
             $table->string('email');
             $table->string('question');

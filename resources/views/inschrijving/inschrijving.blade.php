@@ -21,7 +21,7 @@
 
 
 
-                {{ Form::hidden('encryptedWedstrijdid', $encryptedGameId) }}
+                {{--{{ Form::hidden('encryptedWedstrijdid', $wedstrijdId) }}--}}
 
 
                 {{ csrf_field() }}
@@ -38,6 +38,12 @@
                     {!! Form::label('lastname', 'Achternaam',['class'=> 'col-md-5 control-label controle'])  !!}
                     <div class="col-md-7 ">
                         {!! Form::text('lastname', null, ['class' => 'form-control inputsField']) !!}
+                    </div>
+                </div>
+                <div class="form-group inputss">
+                    {!! Form::label('email', 'Uw emailadres',['class'=> 'col-md-5 control-label']) !!}
+                    <div class="col-md-7">
+                        {!! Form::email('email', null, ['class' => 'form-control inputsField']) !!}
                     </div>
                 </div>
                 <div class="form-group inputss">
@@ -58,12 +64,7 @@
                         {!! Form::number('postcode', null, ['class' => 'form-control inputsField']) !!}
                     </div>
                 </div>
-                <div class="form-group inputss">
-                    {!! Form::label('email', 'Uw emailadres',['class'=> 'col-md-5 control-label']) !!}
-                    <div class="col-md-7">
-                        {!! Form::email('email', null, ['class' => 'form-control inputsField']) !!}
-                    </div>
-                </div>
+
                 <div class="form-group inputss">
                     {!! Form::label('question', 'Hoeveel 25cl pintjes geraken er in 5meter?',['class'=> 'col-md-5 control-label']) !!}
                     <div class="col-md-7 inputss">

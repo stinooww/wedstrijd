@@ -20,10 +20,13 @@ class InschrijvingController extends Controller
 
         $wedstrijdId = wedstrijd::where('is_active', 1)->get();
 
+        $wedstrijdId = $wedstrijdId[0]->id;
+        // echo($wedstrijdId);
+
 //        $gameID = $wedstrijdId[0]->id;
-        $encryptedGameId = encrypt($wedstrijdId[0]->id);
+        // $encryptedGameId = encrypt($wedstrijdId[0]->id);
         //  echo $encryptedGameId;
-        return view('inschrijving.inschrijving', compact('encryptedGameId'));
+        return view('inschrijving.inschrijving', compact('wedstrijdId'));
     }
 
     //store function controleert of ip uniek is en controleert vervolgens via request de input alvorens deelnemr aante make
@@ -38,6 +41,8 @@ class InschrijvingController extends Controller
         $deelnemerIP = \Request::ip();
         //checke of de method post is
         $method = $request->method();
+        // dd( $request->input('streetname'));
+        //   dd($deelnemerIP);
         if ($request->isMethod('POST')) {
             if (!Deelnemer::where('ip', '=', $deelnemerIP)->exists()) {
 
@@ -52,7 +57,7 @@ class InschrijvingController extends Controller
                     $deelnemer->firstname = $inschrijfrequest->firstname;
                     $deelnemer->lastname = $inschrijfrequest->lastname;
                     $deelnemer->email = $inschrijfrequest->email;
-                    $deelnemer->streetname = $inschrijfrequest->street;
+                    $deelnemer->streetname = $inschrijfrequest->streetname;
                     $deelnemer->streetnumber = $inschrijfrequest->streetnumber;
                     $deelnemer->postcode = $inschrijfrequest->postcode;
                     $deelnemer->qualified = 0;

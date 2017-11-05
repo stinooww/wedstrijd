@@ -30,9 +30,8 @@ class InschrijvingRequest extends FormRequest
                 'required',
                 'email',
             ],
-
+            'streetname' => 'string',
             'streetnumber' => 'integer',
-            'street' => 'string',
             'postcode' => 'integer',
             'question' => 'required',
             'deelnemerIP' => 'ip,unique'
