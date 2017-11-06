@@ -59,6 +59,13 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
 });
 
 
+// excel
+Route::post('deelnemers/show/excel', 'ParticipantController@DownloadExcel')->name('excel')->middleware('auth');
+// email
+Route::post('deelnemers/show/mail', 'ParticipantController@SendMail')->name('email')->middleware('auth');
+
+
+
 
 
 
@@ -90,16 +97,6 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
 });
 
 
-// --------EXCEL------------
-// -------------------------
-Route::post('competition/participants/excel', 'DeelnemerController@DownloadExcel')
-    ->name('create_excel')
-    ->middleware('auth');
-// --------SEND MAIL---------
-// --------------------------
-Route::post('competition/participants/mail', 'DeelnemerController@SendMail')
-    ->name('send_mail')
-    ->middleware('auth');
 // --------PERMISSION-----------
 // -------------------------
 Route::get('/checkpermission', 'QuestionController@permission')

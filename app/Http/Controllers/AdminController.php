@@ -62,6 +62,7 @@ class AdminController extends Controller
                 $admin->role_id = $adminrequest->role_id;
                 $admin->save();
                 Session::flash('success', 'Wedstrijd aangepast');
+                echo "gelukt";
                 return view('admin.show', compact('adminList'));
             } else {
                 Session::flash('danger', 'Wedstrijd niet aangepast');

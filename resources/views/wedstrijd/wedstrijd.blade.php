@@ -17,7 +17,7 @@
                     </div>
                     @include("feedback.session")
                     @include("feedback.error")
-                @if($wedstrijdID)
+                @if($wedstrijdID && $wedstrijdID->is_active == 1)
                     <div class="clearfix "></div>
 
                     <section class="wedstrijd">
@@ -54,13 +54,13 @@
                                     aanpassen</a>
                             </div>
                         @endif
+
                         @endforeach
                         @else
 
                             @if(Auth::check())
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <a class="btn btnLarge" href="{{ route('createwedstrijd') }}">Wedstrijd
-                                        aanmaken</a>
+                                    <a class="btn btnLarge" href="{{ route('createwedstrijd') }}">Wedstrijd aanmaken</a>
                                 </div>
 
                             @endif

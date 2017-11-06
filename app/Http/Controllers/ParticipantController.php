@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Deelnemer;
-use App\EmailManager;
+use App\Email;
 use App\Http\Requests\WedstrijdRequest;
 use App\User;
 use App\Winnaar;
@@ -35,7 +35,7 @@ class ParticipantController extends Controller
     {
         // $deelnemer = $request->$id;
         $deelnemer = Deelnemer::findOrFail($id);
-
+        $deelnemerslijst = Deelnemer::all();
         $method = $request->method();
         $userid = Auth::id();
         $role = User::where('id', '=', $userid)->get();
@@ -52,9 +52,12 @@ class ParticipantController extends Controller
                     $deelnemer->is_deleted = 0;
                     $deelnemer->question = $wedstrijdRequest->question;
 
-                    Session::flash('success', 'Deelnemer werd aangepast');
+                    $request->session()->flash('flash_message', 'Deelnemer werd aangepast');
+                    return view('deelnemers.show')->with(compact('deelnemerslijst'));
                 } catch (Exception $exception) {
-                    Session::flash('danger', 'Deelnemer fout' . $exception);
+                    $request->session()->flash('flash_message', 'Deelnemer fout tijdens toevoegen');
+                    // echo $exception;
+                    return view('deelnemers.edit', compact('deelnemer'));
                 }
             }
             return view('deelnemers.edit', compact('deelnemer'));
@@ -66,7 +69,7 @@ class ParticipantController extends Controller
     {
         Excel::create('deelnemers', function ($excel) {
             $excel->sheet('Deelnemers', function ($list) {
-                $list->fromArray(Participant::all(), null, 'A4', false, false);
+                $list->fromArray(Deelnemer::all(), null, 'A4', false, false);
             });
         })
             ->download('xls');
@@ -76,23 +79,29 @@ class ParticipantController extends Controller
     {
         $deelnemers = Deelnemer::all();
         Mail::send('deelnemers.show', ['deelnemerslijst' => $deelnemers], function ($message) {
-            $emailmanagers = EmailManager::all();
-            foreach ($emailmanagers as $m) {
-                $message->to($m->email)->subject('Deelnemerslijst');
-            }
+            $emailVerantwoordelijke = Email::with('user')->where('user_id', 'id')->get();
+            dd($emailVerantwoordelijke);
+//            foreach ($emailVerantwoordelijke as $m) {
+//                $message->to($m->email)->subject('Deelnemerslijst');
+//            }
+            $message->to($emailVerantwoordelijke->email)->subject('Deelnemerslijst');
         });
         Session::flash("success", ("Deelnemerslijst naar e-mailmanagers verstuurd!"));
         return redirect()->back();
     }
 
+
     public function SendAutoMail()
     {
         $deelnemers = Deelnemer::all();
         Mail::send('participants.participants', ['deelnemerslijst' => $deelnemers, 'errors' => []], function ($message) {
-            $emailmanagers = EmailManager::all();
-            foreach ($emailmanagers as $m) {
+
+            $emailVerantwoordelijke = Email::all();
+            foreach ($emailVerantwoordelijke as $m) {
                 $message->to($m->email)->subject('Deelnemerslijst');
             }
+
+
         });
         return;
     }
@@ -100,8 +109,8 @@ class ParticipantController extends Controller
     public function SendWinningMail()
     {
         Mail::send('mail.email', [], function ($message) {
-            $winnendeDeelnemer = Winnaar::with('deelnemer')->where('id', '=', 'deelnemer_id')->take(1)->get()->first();
-            $message->to($winnendeDeelnemer->email)->subject('Proficiat u heeft gewonnen!');
+            $winnaar = Winnaar::with('deelnemer')->where('id', '=', 'deelnemer_id')->take(1)->get()->first();
+            $message->to($winnaar->email)->subject('Proficiat u heeft 5 meter bier gewonnen!');
         });
         return;
     }

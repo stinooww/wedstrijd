@@ -29,6 +29,14 @@ class GameController extends Controller
 
     public function create(Request $request, WedstrijdRequest $wedstrijdRequest)
     {
+        if (Wedstrijd::all()) {
+            $actieve_wedstrijd = Wedstrijd::where('is_active', 1)->get();
+
+        }
+        $wedstrijdID = Wedstrijd::first();
+        $verantwoordelijke = User::where('role_id', 2)->get();
+
+        //    dd($verantwoordelijke[0]->id);
         $userid = Auth::id();
         $role = User::where('id', '=', $userid)->get();
         if ($role[0]->role_id == 2) {
@@ -36,17 +44,22 @@ class GameController extends Controller
 
 
                 $wedstrijd = new Wedstrijd();
-
+                $wedstrijd->user_id = $verantwoordelijke[0]->id;
                 $wedstrijd->name = $wedstrijdRequest->name;
                 $wedstrijd->start_date = $wedstrijdRequest->start_date;
                 $wedstrijd->end_date = $wedstrijdRequest->end_date;
                 $wedstrijd->is_active = $wedstrijdRequest->is_active;
                 $wedstrijd->save();
-                Session::flash('success', 'Wedstrijd toegevoegd');
-
+                $request->session()->flash('flash_message', 'Wedstrijd toegevoegd');
+//                Session::flash('success', '');
+                return view("wedstrijd.wedstrijd", compact('actieve_wedstrijd', 'wedstrijdID'));
             }
+            $request->session()->flash('flash_message', 'error, probeer opnieuw');
             return view('wedstrijd.create');
+        } else {
+            $request->session()->flash('flash_message', 'error, u mag geen wedstrijd aanmaken');
         }
+
         return view('wedstrijd.create');
     }
 

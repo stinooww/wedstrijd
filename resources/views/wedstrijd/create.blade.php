@@ -22,7 +22,7 @@
 
 
                     <h2 class="text-center">Wedstrijd aanmaken</h2>
-                    {!! Form::open(array('route' => 'editwedstrijd','class' => 'form-horizontal')) !!}
+                    {!! Form::open(array('route' => 'createwedstrijd','class' => 'form-horizontal')) !!}
                     {{ csrf_field() }}
 
                     <div class="form-group inputss">
@@ -53,7 +53,7 @@
 
 
                     <div class="form-group">
-                        {{ Form::submit('submit', array('class' => 'btn btn-primary')) }}
+                        {{ Form::submit('submit', array('class' => 'btn btnLarge')) }}
                     </div>
 
 

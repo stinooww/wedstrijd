@@ -44,7 +44,7 @@ li {
     position: relative;
     top: 0;
     right: 0;
-    padding: 18px 20px 5px 20px;
+    padding: 18px 20px;
     width: 200px;
     background: #000;
     color: #fff;
@@ -253,4 +253,16 @@ a {
     text-decoration: none;
 
     padding: 2%;
+}
+
+.extra {
+    margin-top: 10%;
+}
+
+.extra input {
+    margin-left: 2%;
+
+    padding: 10px 10px;
+    font-size: 14px;
+    height: 45px;
 }

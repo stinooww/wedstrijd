@@ -50,12 +50,15 @@
                             @endforeach
                         {{--@endif--}}
 
-                        {!! Form::open(array('route' => 'create_excel')) !!}
-                        {{ Form::submit('Download Excel', array('class' => 'btn btn-primary pull-right')) }}
+                    </section>
+                    <div class="clearfix "></div>
+                    <section class="extra ">
+                        {!! Form::open(array('route' => 'excel')) !!}
+                        {{ Form::submit('Download Excel', array('class' => 'btn btnLarge ')) }}
                         {!! Form::close() !!}
-
-                        {!! Form::open(array('route' => 'send_mail')) !!}
-                        {{ Form::submit('Verstuur mail', array('class' => 'btn btn-primary pull-right')) }}
+                        <br>
+                        {!! Form::open(array('route' => 'email')) !!}
+                        {{ Form::submit('Verstuur mail', array('class' => 'btn btnLarge ')) }}
                         {!! Form::close() !!}
                     </section>
 
