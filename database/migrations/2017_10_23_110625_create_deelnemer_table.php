@@ -25,8 +25,9 @@ class CreateDeelnemerTable extends Migration
             $table->integer('postcode');
             $table->string('email');
             $table->string('question');
-            $table->boolean('is_deleted')->default(0);
             $table->boolean('qualified')->default(0);
+            $table->boolean('is_deleted')->default(0);
+
             $table->ipAddress('ip')->unique();
             $table->timestamps();
         });

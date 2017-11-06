@@ -35,10 +35,10 @@
 
                                         <li class="list-group-item">E-mail: {{ $deelnemer->email }}</li>
                                         <li class="list-group-item">
-                                            Adres: {{$deelnemer->street}} {{$deelnemer->housenumber}}</li>
+                                            Adres: {{$deelnemer->streetname}} {{$deelnemer->streetnumber}}</li>
                                         <li class="list-group-item">Postcode: {{$deelnemer->postcode}} </li>
-                                        <li class="list-group-item">
-                                            Gedisqualificeerd: {{ $deelnemer->disqualified }}</li>
+                                        <li class="list-group-item"> Gedisqualificeerd: {{ $deelnemer->qualified }}</li>
+
                                         <li class="list-group-item">Speler verwijderd: {{ $deelnemer->is_deleted }}</li>
                                         <li>
                                             <a class="btn btnLarge" href="{{ route('editdeelnemer', $deelnemer->id) }}">Deelnemer

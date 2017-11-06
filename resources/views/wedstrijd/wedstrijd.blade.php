@@ -17,7 +17,7 @@
                     </div>
                     @include("feedback.session")
                     @include("feedback.error")
-                @if($wedstrijdID && $wedstrijdID->is_active == 1)
+                @if($actieve_wedstrijd)
                     <div class="clearfix "></div>
 
                     <section class="wedstrijd">

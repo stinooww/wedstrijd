@@ -43,13 +43,13 @@
                             </div>
                             <div class="form-group ">
                                 {!! Form::label('is_deleted', 'Verwijderen',['class'=> 'col-md-5 control-label controle'])  !!}
-                                <div class="col-md-5">
+                                <div class="col-md-12">
                                     {!! Form::select('is_deleted', array('1' => 'Ja', '0' => 'Nee'), '0', ['class' => 'form-control inputsField']) !!}
                                 </div>
                             </div>
-                            <div class="form-group ">
+                            <div class="form-group inputss">
                                 {!! Form::label('qualified', 'Disqualificren',['class'=> 'col-md-5 control-label controle'])  !!}
-                                <div class="col-md-5 ">
+                                <div class="col-md-12 ">
                                     {!! Form::select('qualified', array('1' => 'Ja', '0' => 'Nee'), '0', ['class' => 'form-control inputsField']) !!}
                                 </div>
                             </div>
@@ -58,13 +58,13 @@
                     <div class="col-sm-6">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{ Form::label('street', 'Straatnaam', array('class' => 'control-label pull-left')) }}
-                                <input type="text" class="form-control" name="street"
+                                {{ Form::label('streetname', 'Straatnaam', array('class' => 'control-label pull-left')) }}
+                                <input type="text" class="form-control" name="streetname"
                                        value="{{$deelnemer->streetname}}">
                             </div>
                             <div class="form-group">
-                                {{ Form::label('housenumber', 'Nummer', array('class' => 'control-label pull-left')) }}
-                                <input type="text" class="form-control" name="housenumber"
+                                {{ Form::label('streetnumber', 'Nummer', array('class' => 'control-label pull-left')) }}
+                                <input type="text" class="form-control" name="streetnumber"
                                        value="{{$deelnemer->streetnumber}}">
                             </div>
                             <div class="form-group">

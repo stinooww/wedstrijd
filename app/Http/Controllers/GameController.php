@@ -7,7 +7,6 @@ use App\User;
 use App\Wedstrijd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class GameController extends Controller
 {
@@ -15,7 +14,7 @@ class GameController extends Controller
     {
         if (Wedstrijd::all()) {
             $actieve_wedstrijd = Wedstrijd::where('is_active', 1)->get();
-            // dd($actieve_wedstrijd->id);
+            //  dd($actieve_wedstrijd[0]->id);
         }
 
         $wedstrijd = Wedstrijd::find(1);
@@ -23,7 +22,7 @@ class GameController extends Controller
 //dd($wedstrijd);
         $wedstrijdID = Wedstrijd::first();
 //dd( $wedstrijdID->id);
-        return view("wedstrijd.wedstrijd", compact('actieve_wedstrijd', 'wedstrijdID'));
+        return view("wedstrijd.wedstrijd", compact('actieve_wedstrijd'));
 
     }
 
@@ -33,7 +32,7 @@ class GameController extends Controller
             $actieve_wedstrijd = Wedstrijd::where('is_active', 1)->get();
 
         }
-        $wedstrijdID = Wedstrijd::first();
+        // $wedstrijdID = Wedstrijd::first();
         $verantwoordelijke = User::where('role_id', 2)->get();
 
         //    dd($verantwoordelijke[0]->id);
@@ -52,10 +51,10 @@ class GameController extends Controller
                 $wedstrijd->save();
                 $request->session()->flash('flash_message', 'Wedstrijd toegevoegd');
 //                Session::flash('success', '');
-                return view("wedstrijd.wedstrijd", compact('actieve_wedstrijd', 'wedstrijdID'));
+                return redirect()->back();
             }
             $request->session()->flash('flash_message', 'error, probeer opnieuw');
-            return view('wedstrijd.create');
+
         } else {
             $request->session()->flash('flash_message', 'error, u mag geen wedstrijd aanmaken');
         }
@@ -74,7 +73,7 @@ class GameController extends Controller
         //  $wedstrijdId = Wedstrijd::first();
         //  $new = $actieve_wedstrijd->id;
 
-        $wedstrijd = Wedstrijd::where('id', $wedstrijdId)->first();
+        $wedstrijd = Wedstrijd::findOrFail($wedstrijdId);
 //         dd($wedstrijd);
         $userid = Auth::id();
         $role = User::where('id', '=', $userid)->get();
@@ -88,11 +87,11 @@ class GameController extends Controller
                 $wedstrijd->is_active = $wedstrijdRequest->is_active;
                 $wedstrijd->save();
 
-                Session::flash('success', 'Wedstrijd aangepast');
-                return view("wedstrijd.wedstrijd", compact('actieve_wedstrijd', 'wedstrijdID'));
+                $request->session()->flash('flash_message', 'Wedstrijd aangepast');
+                return redirect()->back();
             }
-            Session::flash('danger', 'Wedstrijd niet aangepast');
-            return view("wedstrijd.edit", compact('wedstrijdId'));
+            $request->session()->flash('flash_message', 'Wedstrijd niet aangepast');
+
         }
 
         return view("wedstrijd.edit", compact('wedstrijdId'));

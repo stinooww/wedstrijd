@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Deelnemer;
 use App\Email;
-use App\Http\Requests\WedstrijdRequest;
+use App\Http\Requests\InschrijvingRequest;
 use App\User;
 use App\Winnaar;
 use Illuminate\Http\Request;
@@ -31,7 +31,7 @@ class ParticipantController extends Controller
         }
     }
 
-    public function edit(Request $request, WedstrijdRequest $wedstrijdRequest, $id)
+    public function edit(Request $request, InschrijvingRequest $RegisterReq, $id)
     {
         // $deelnemer = $request->$id;
         $deelnemer = Deelnemer::findOrFail($id);
@@ -42,29 +42,29 @@ class ParticipantController extends Controller
         if ($role[0]->role_id == 2) {
             if ($method === 'POST') {
                 try {
-                    $deelnemer->firstname = $wedstrijdRequest->firstname;
-                    $deelnemer->lastname = $wedstrijdRequest->lastname;
-                    $deelnemer->email = $wedstrijdRequest->email;
-                    $deelnemer->street = $wedstrijdRequest->street;
-                    $deelnemer->streetnumber = $wedstrijdRequest->streetnumber;
-                    $deelnemer->postcode = $wedstrijdRequest->postcode;
-                    $deelnemer->qualified = 0;
-                    $deelnemer->is_deleted = 0;
-                    $deelnemer->question = $wedstrijdRequest->question;
-
+                    $deelnemer->firstname = $RegisterReq->firstname;
+                    $deelnemer->lastname = $RegisterReq->lastname;
+                    $deelnemer->email = $RegisterReq->email;
+                    $deelnemer->streetname = $RegisterReq->streetname;
+                    $deelnemer->streetnumber = $RegisterReq->streetnumber;
+                    $deelnemer->postcode = $RegisterReq->postcode;
+                    $deelnemer->qualified = $request->input('qualified');
+                    $deelnemer->is_deleted = $request->input('is_deleted');
+                    $deelnemer->question = $RegisterReq->question;
+                    $deelnemer->save();
                     $request->session()->flash('flash_message', 'Deelnemer werd aangepast');
-                    return view('deelnemers.show')->with(compact('deelnemerslijst'));
+                    return redirect()->back();
                 } catch (Exception $exception) {
-                    $request->session()->flash('flash_message', 'Deelnemer fout tijdens toevoegen');
+                    $request->session()->flash('flash_message', 'fout tijdens het toevoegen');
                     // echo $exception;
-                    return view('deelnemers.edit', compact('deelnemer'));
+
                 }
             }
             return view('deelnemers.edit', compact('deelnemer'));
         }
     }
 
-
+//download excel, installeert een xls file op uw pc met lijst van alle deelnemers
     public function DownloadExcel()
     {
         Excel::create('deelnemers', function ($excel) {
@@ -75,11 +75,21 @@ class ParticipantController extends Controller
             ->download('xls');
     }
 
+//verstuurd een email naar emailverantwoordelijke met list van alle deelnemers
     public function SendMail()
     {
+        $actieveAdmin = User::where('role_id', 2)->get();
+        $activeAdminId = $actieveAdmin[0]->id;
+
+
+        $emailVerantwoordelijke = Email::where('wedstrijd_id', '=', 3)->get();
+        dd($emailVerantwoordelijke[0]->name);
+
+
+
         $deelnemers = Deelnemer::all();
         Mail::send('deelnemers.show', ['deelnemerslijst' => $deelnemers], function ($message) {
-            $emailVerantwoordelijke = Email::with('user')->where('user_id', 'id')->get();
+            $emailVerantwoordelijke = Email::with('user')->where('user_id', '=', 'id')->take(1)->get();
             dd($emailVerantwoordelijke);
 //            foreach ($emailVerantwoordelijke as $m) {
 //                $message->to($m->email)->subject('Deelnemerslijst');

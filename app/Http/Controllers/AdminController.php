@@ -6,7 +6,7 @@ use App\Http\Requests\AdminRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use League\Flysystem\Exception;
 
 class AdminController extends Controller
 {
@@ -57,15 +57,19 @@ class AdminController extends Controller
         if ($role[0]->role_id == 2) {
             if ($request->isMethod('POST')) {
 
-                $admin->name = $adminrequest->name;
-                $admin->email = $adminrequest->email;
-                $admin->role_id = $adminrequest->role_id;
-                $admin->save();
-                Session::flash('success', 'Wedstrijd aangepast');
-                echo "gelukt";
-                return view('admin.show', compact('adminList'));
-            } else {
-                Session::flash('danger', 'Wedstrijd niet aangepast');
+                try {
+                    $admin->name = $adminrequest->name;
+                    $admin->email = $adminrequest->email;
+                    $admin->role_id = $adminrequest->role_id;
+                    $admin->save();
+
+                    $request->session()->flash('status', 'admin aangepast');
+                    return redirect()->back();
+                } catch (Exception $ex) {
+                    $request->session()->flash('flash_message', 'admin niet aangepast');
+                }
+
+                // return view('admin.show', compact('adminList'));
             }
         }
 
