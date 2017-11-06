@@ -4,21 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class SendDailyEntriesExport extends Command
+class SendParticipantsInfo extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'send-participants-info';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Stuurt elke dag een deelnemerslijst naar de wedstrijdverantwoorelijke';
+    protected $description = 'Stuurt elke dag een deelnemerslijst naar de wedstrijdverantwoordelijke';
 
     /**
      * Create a new command instance.

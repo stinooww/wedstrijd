@@ -75,6 +75,18 @@ a {
     border-color: #cd163a;
 
 }
+
+#lijst .row {
+    margin: 0;
+    padding: 0;
+}
+
+footer p {
+    /*margin: 0;*/
+    margin-top: 20%;
+    text-align: center;
+    color: black;
+}
 /*css menu  + header*/
 
 #menu {
@@ -164,6 +176,16 @@ a {
 
 #call a {
     color: white;
+}
+
+.wedstrijd #call {
+    padding: 12px;
+    margin-bottom: 4%;
+}
+
+.wedstrijd #call:hover {
+    padding: 5px;
+    margin-bottom: 4%;
 }
 #call:hover {
     border: 5px solid #cd163a;

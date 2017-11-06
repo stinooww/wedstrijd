@@ -45,7 +45,7 @@
                         {!! Form::label('role_id', 'Role',['class'=> 'col-md-5 control-label controle'])  !!}
                         <div class="col-md-7 ">
                             {{--{!! Form::date('role_id', null, ['class' => 'form-control inputsField']) !!}--}}
-                            {!! Form::select('role_id', array('1' => 'User', '2' => 'Admin'), '2', ['class' => 'form-control inputsField']) !!}
+                            {!! Form::select('role_id', array('1' => 'Verantwoordelijke', '2' => 'Admin'), '2', ['class' => 'form-control inputsField']) !!}
                         </div>
                     </div>
                     {{--<div class="form-group inputss">--}}

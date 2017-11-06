@@ -14,7 +14,7 @@ class GameController extends Controller
     {
         if (Wedstrijd::all()) {
             $actieve_wedstrijd = Wedstrijd::where('is_active', 1)->get();
-            //  dd($actieve_wedstrijd[0]->id);
+            //   dd($actieve_wedstrijd);
         }
 
         $wedstrijd = Wedstrijd::find(1);

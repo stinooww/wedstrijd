@@ -78,11 +78,11 @@
                 {{--</div>--}}
                 {{--</div>--}}
 
-                <div class="form-group">
-                    <div class="col-md-6">
-                        <a href="{{url('/redirect')}}" class="btn btn-primary btn-lg">Login with Facebook</a>
-                    </div>
-                </div>
+                {{--<div class="form-group">--}}
+                {{--<div class="col-md-6">--}}
+                {{--<a href="{{url('/redirect')}}" class="btn btn-primary btn-lg">Login with Facebook</a>--}}
+                {{--</div>--}}
+                {{--</div>--}}
 
                 <div class="form-group ">
                     <div class=" col-md-6" id="submitBtn">

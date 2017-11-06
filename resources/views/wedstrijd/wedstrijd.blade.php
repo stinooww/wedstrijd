@@ -22,13 +22,16 @@
 
                     <section class="wedstrijd">
 
-                        <p>Vul de super moeilijke vraag in met al je gegevens en maak kans op 5 meter bier .
+                        <p>Vul de wedstrijd vraag in met al je gegevens en maak kans op 5 meter bier .
                             <br> Als je de vraag juist hebt beantwoord zal je worden verwittigd per e-mail! </p>
 
-
+                        <a id="call" class="btnLarge" href="{{ route('inschrijvingspagina') }}">Doe mee aan de
+                            wedstrijd</a>
+                        <div class="clearfix "></div>
 
                             <div class="col-md-6 col-md-offset-3">
                                 <h3>Huidige wedstrijd</h3>
+
                                 @foreach($actieve_wedstrijd as $activeGame)
                                     <p>Wedstrijdid: {{ $activeGame->id }}</p>
                                     <p>Wedstrijdnaam: {{ $activeGame->name }}</p>
@@ -57,7 +60,7 @@
 
                         @endforeach
                         @else
-
+                            <p>jooo</p>
                             @if(Auth::check())
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <a class="btn btnLarge" href="{{ route('createwedstrijd') }}">Wedstrijd aanmaken</a>

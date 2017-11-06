@@ -26,7 +26,7 @@
     </div>
         <div id="lijst">
         <div class="row">
-            <div class="col-lg-offset-4 col-lg-8 col-md-8 col-md-offset-4 col-sm-12" id="lijstWinnaars">
+            <div class="col-lg-offset-4 col-lg-5 col-md-5 col-md-offset-4 col-sm-12" id="lijstWinnaars">
                 <h2>Overzicht van al de winnaars van vorige periodes</h2>
                 <div class="winnaarslijst">
 

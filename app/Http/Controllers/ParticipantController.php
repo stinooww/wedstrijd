@@ -33,6 +33,8 @@ class ParticipantController extends Controller
 
     public function edit(Request $request, InschrijvingRequest $RegisterReq, $id)
     {
+        $winnaar = Winnaar::with('deelnemer')->where('deelnemer_id', '=', 'id')->take(1)->get();
+        dd($winnaar);
         // $deelnemer = $request->$id;
         $deelnemer = Deelnemer::findOrFail($id);
         $deelnemerslijst = Deelnemer::all();
@@ -78,24 +80,32 @@ class ParticipantController extends Controller
 //verstuurd een email naar emailverantwoordelijke met list van alle deelnemers
     public function SendMail()
     {
-        $actieveAdmin = User::where('role_id', 2)->get();
-        $activeAdminId = $actieveAdmin[0]->id;
 
 
-        $emailVerantwoordelijke = Email::where('wedstrijd_id', '=', 3)->get();
-        dd($emailVerantwoordelijke[0]->name);
+        // $emailVerantwoordelijke = Email::where('wedstrijd_id', '=', 3)->get();
+        // dd($emailVerantwoordelijke[0]->name);
 
-
+        //  dd(env('MAIL_USERNAME'));
 
         $deelnemers = Deelnemer::all();
         Mail::send('deelnemers.show', ['deelnemerslijst' => $deelnemers], function ($message) {
-            $emailVerantwoordelijke = Email::with('user')->where('user_id', '=', 'id')->take(1)->get();
-            dd($emailVerantwoordelijke);
+            $actieveAdmin = User::where('role_id', 1)->get();
+            $activeAdminEmail = $actieveAdmin[0]->email;
+            //    dd($activeAdminId);
+            //     $emailVerantwoordelijke = Email::with('users')->where('user_id', '=', $activeAdminId)->get();
+
+            //   dd($emailVerantwoordelijke[0]->email);
+
+
+
+
+
 //            foreach ($emailVerantwoordelijke as $m) {
 //                $message->to($m->email)->subject('Deelnemerslijst');
 //            }
-            $message->to($emailVerantwoordelijke->email)->subject('Deelnemerslijst');
+            $message->to($activeAdminEmail)->subject('Deelnemerslijst');
         });
+        dd('Mail Send Successfully');
         Session::flash("success", ("Deelnemerslijst naar e-mailmanagers verstuurd!"));
         return redirect()->back();
     }
@@ -104,7 +114,7 @@ class ParticipantController extends Controller
     public function SendAutoMail()
     {
         $deelnemers = Deelnemer::all();
-        Mail::send('participants.participants', ['deelnemerslijst' => $deelnemers, 'errors' => []], function ($message) {
+        Mail::send('deelnemers.show', ['deelnemerslijst' => $deelnemers, 'errors' => []], function ($message) {
 
             $emailVerantwoordelijke = Email::all();
             foreach ($emailVerantwoordelijke as $m) {
@@ -120,6 +130,7 @@ class ParticipantController extends Controller
     {
         Mail::send('mail.email', [], function ($message) {
             $winnaar = Winnaar::with('deelnemer')->where('id', '=', 'deelnemer_id')->take(1)->get()->first();
+
             $message->to($winnaar->email)->subject('Proficiat u heeft 5 meter bier gewonnen!');
         });
         return;

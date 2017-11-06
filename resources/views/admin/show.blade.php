@@ -24,16 +24,16 @@
                 <p>Adminnaam: {{ $admin->name }}</p>
                 <p>Admin emaildres: {{ $admin->email }}</p>
                 @if($admin->role_id == 2)
-                    <p>Functie: wedstrijd verantwoordelijke / admin </p>
+                    <p>Functie: Admin </p>
 
                 @else
-                    <p>Functie: Normal user </p>
+                    <p>Functie: Wedstrijdverantwoordelijke </p>
 
                 @endif
                 <a class="btn btnLarge" href="{{ route('adminupdate', $admin->id) }}">Admin
                     aanpassen </a>
 
-
+                <hr>
             </div>
 
         @endforeach
