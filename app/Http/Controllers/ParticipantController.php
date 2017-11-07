@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 use League\Flysystem\Exception;
 use Maatwebsite\Excel\Facades\Excel;
 use function redirect;
@@ -80,15 +79,17 @@ class ParticipantController extends Controller
 //verstuurd een email naar emailverantwoordelijke met list van alle deelnemers
     public function SendMail()
     {
+        $actieveAdmin = User::where('role_id', 1)->get();
         // $emailVerantwoordelijke = Email::where('wedstrijd_id', '=', 3)->get();
         // dd($emailVerantwoordelijke[0]->name);
 
-        //  dd(env('MAIL_USERNAME'));
-
+        // dd(env('DB_DATABASE'));
+        if ()
         $deelnemers = Deelnemer::all();
         Mail::send('deelnemers.show', ['deelnemerslijst' => $deelnemers], function ($message) {
             $actieveAdmin = User::where('role_id', 1)->get();
             $activeAdminEmail = $actieveAdmin[0]->email;
+            dd($activeAdminEmail);
             //    dd($activeAdminId);
             //     $emailVerantwoordelijke = Email::with('users')->where('user_id', '=', $activeAdminId)->get();
 
@@ -96,8 +97,8 @@ class ParticipantController extends Controller
 
             $message->to($activeAdminEmail)->subject('Deelnemerslijst');
         });
-        // dd('Mail Send Successfully');
-        Session::flash("success", ("Deelnemerslijst naar e-mailmanagers verstuurd!"));
+        dd('Mail Send Successfully');
+        // Session::flash("success", ("Deelnemerslijst naar e-mailmanagers verstuurd!"));
         return redirect()->back();
     }
 
