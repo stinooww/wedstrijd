@@ -51,7 +51,7 @@ class SelectWinner extends Command
 
         $winnaar->save();
 //        $this->info($period);
-        return app('App\Http\Controllers\ParticipantController')->SendWinningMail();
+        return app('App\Http\Controllers\ParticipantController')->SendWinningMail($winnaarID);
 
     }
 }

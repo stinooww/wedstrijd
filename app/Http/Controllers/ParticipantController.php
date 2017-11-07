@@ -6,7 +6,6 @@ use App\Deelnemer;
 use App\Email;
 use App\Http\Requests\InschrijvingRequest;
 use App\User;
-use App\Winnaar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -33,8 +32,8 @@ class ParticipantController extends Controller
 
     public function edit(Request $request, InschrijvingRequest $RegisterReq, $id)
     {
-        $winnaar = Winnaar::with('deelnemer')->where('deelnemer_id', '=', 'id')->take(1)->get();
-        dd($winnaar);
+
+
         // $deelnemer = $request->$id;
         $deelnemer = Deelnemer::findOrFail($id);
         $deelnemerslijst = Deelnemer::all();
@@ -80,8 +79,6 @@ class ParticipantController extends Controller
 //verstuurd een email naar emailverantwoordelijke met list van alle deelnemers
     public function SendMail()
     {
-
-
         // $emailVerantwoordelijke = Email::where('wedstrijd_id', '=', 3)->get();
         // dd($emailVerantwoordelijke[0]->name);
 
@@ -96,13 +93,6 @@ class ParticipantController extends Controller
 
             //   dd($emailVerantwoordelijke[0]->email);
 
-
-
-
-
-//            foreach ($emailVerantwoordelijke as $m) {
-//                $message->to($m->email)->subject('Deelnemerslijst');
-//            }
             $message->to($activeAdminEmail)->subject('Deelnemerslijst');
         });
         dd('Mail Send Successfully');
@@ -116,22 +106,24 @@ class ParticipantController extends Controller
         $deelnemers = Deelnemer::all();
         Mail::send('deelnemers.show', ['deelnemerslijst' => $deelnemers, 'errors' => []], function ($message) {
 
-            $emailVerantwoordelijke = Email::all();
-            foreach ($emailVerantwoordelijke as $m) {
-                $message->to($m->email)->subject('Deelnemerslijst');
-            }
 
+            $emailVerantwoordelijke = User::where('role_id', 1)->get();
+            $message->to($emailVerantwoordelijke[0]->email)->subject('Deelnemerslijst');
 
         });
         return;
     }
 
-    public function SendWinningMail()
+    public function SendWinningMail($winnaarID)
     {
-        Mail::send('mail.email', [], function ($message) {
-            $winnaar = Winnaar::with('deelnemer')->where('id', '=', 'deelnemer_id')->take(1)->get()->first();
 
-            $message->to($winnaar->email)->subject('Proficiat u heeft 5 meter bier gewonnen!');
+        //  dd($userEmail[0]->email);
+        Mail::send('mail.email', [], function ($message, $winnaarID) {
+
+            $userEmail = User::where('id', $winnaarID)->get();
+            //  $winnaar = Winnaar::with('deelnemer')->where('id', '=', 'deelnemer_id')->take(1)->get()->first();
+
+            $message->to($userEmail[0]->email)->subject('Proficiat u heeft 5 meter bier gewonnen!');
         });
         return;
     }
