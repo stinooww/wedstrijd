@@ -30,9 +30,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->command('select-winner')
-            ->dailyAt('00:02');
+            ->dailyAt('00:01');
         $schedule->command('send-participants-info')
-            ->dailyAt('00:02');
+            ->dailyAt('00:01');
     }
 
     /**

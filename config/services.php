@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('sandbox34af4eec860c41279e54fbd637836df6.mailgun.org'),
-        'secret' => env('key-cac2930e128f97d751c14eacc1a1152b'),
+        'domain' => env('wedstrijd.stijn.heynderickx.mtantwerp.eu'),
+        'secret' => env('key-7440b605f02ed428667adf04b233aa49'),
     ],
 
     'ses' => [

@@ -6,17 +6,17 @@
             <div class="col-lg-offset-2 col-lg-10 col-md-offset-2 col-md-10 col-sm-12">
                 <div class="breadcrumb col-lg-4 col-md-4">
 
-                    <a href="{{ route('dashboard') }}"><- ga terug</a>
+                    <a href="{{ route('wedstrijdindex') }}"><- ga terug</a>
 
                     <br>
                     <br>
 
 
                 </div>
+                <div class="clearfix "></div>
                 @include("feedback.session")
                 @include("feedback.error")
 
-                <div class="clearfix "></div>
 
                 <section class="wedstrijd">
 

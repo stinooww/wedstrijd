@@ -24,14 +24,14 @@ class InschrijvingRequest extends FormRequest
     {
         return [
             //
-            'first_name' => 'required,alpha,min:2',
-            'last_name' => 'required,alpha,min:2',
-            'email.required' => 'Het email adres is verplicht',
-            'streetname' => 'string',
-            'streetnumber' => 'integer',
-            'postcode' => 'integer',
-            'question.required' => 'de vraag is verplicht',
-            'deelnemerIP' => 'ip,unique'
+            'first_name' => 'required|string|min:2|max:255',
+            'last_name' => 'required|string|min:2|max:255',
+            'email' => 'required|email',
+            'streetname' => 'string|min:2|max:255',
+            'streetnumber' => 'integer|max:255',
+            'postcode' => 'integer|max:9999',
+            'question.required.integer' => 'de vraag is verplicht',
+            'deelnemerIP' => 'ip|unique'
         ];
     }
 }

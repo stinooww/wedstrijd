@@ -60,44 +60,12 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
 
 
 // excel
-Route::post('deelnemers/show/excel', 'ParticipantController@DownloadExcel')->name('excel')->middleware('auth');
+Route::post('deelnemers/show/excel', 'ParticipantController@DownloadExcel')->middleware('auth')->name('excel');
 // email
-Route::post('deelnemers/show/mail', 'ParticipantController@SendMail')->name('email')->middleware('auth');
+Route::post('deelnemers/show/mail', 'ParticipantController@SendMail')->middleware('auth')->name('email');
+//Route::post('deelnemers/show/mail/{id}', 'ParticipantController@SendWinningMail')->middleware('auth')->name('email');
 
 
 
 
 
-
-
-
-
-
-// -----------CONFIG-----------
-// ----------------------------
-Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
-    Route::get('/instellingen', 'ConfigController@index')
-        ->name('config')
-        ->middleware('auth');;
-    Route::get('/instellingen/emailmanager/create', 'ConfigController@create')
-        ->name('create_email_manager')
-        ->middleware('auth');
-    Route::post('/instellingen/emailmanager/create', 'ConfigController@create')
-        ->name('create_email_manager')
-        ->middleware('auth');
-    Route::post('/instellingen/emailmanager/edit/{id}', 'ConfigController@editManager')
-        ->name('edit_email_manager')
-        ->middleware('auth');
-    Route::get('/instellingen/emailmanager/edit/{id}', 'ConfigController@editManager')
-        ->name('edit_email_manager')
-        ->middleware('auth');
-    Route::get('/instellingen/emailmanager/delete/{id}', 'ConfigController@deleteManager')
-        ->name('delete_email_manager')
-        ->middleware('auth');
-});
-
-
-// --------PERMISSION-----------
-// -------------------------
-Route::get('/checkpermission', 'QuestionController@permission')
-    ->name('permission');

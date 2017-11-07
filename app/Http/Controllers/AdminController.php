@@ -63,7 +63,7 @@ class AdminController extends Controller
                     $admin->role_id = $adminrequest->role_id;
                     $admin->save();
 
-                    $request->session()->flash('status', 'admin aangepast');
+                    $request->session()->flash('flash_message', 'admin aangepast');
                     return redirect()->back();
                 } catch (Exception $ex) {
                     $request->session()->flash('flash_message', 'admin niet aangepast');

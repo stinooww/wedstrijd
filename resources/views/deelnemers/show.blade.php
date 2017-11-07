@@ -37,9 +37,15 @@
                                         <li class="list-group-item">
                                             Adres: {{$deelnemer->streetname}} {{$deelnemer->streetnumber}}</li>
                                         <li class="list-group-item">Postcode: {{$deelnemer->postcode}} </li>
-                                        <li class="list-group-item"> Gedisqualificeerd: {{ $deelnemer->qualified }}</li>
+                                        <li class="list-group-item"> Gedisqualificeerd:
 
-                                        <li class="list-group-item">Speler verwijderd: {{ $deelnemer->is_deleted }}</li>
+                                            @if($deelnemer->qualified == 0)nee
+
+                                            @else
+                                                ja
+                                            @endif</li>
+                                        <li class="list-group-item">Speler verwijderd: @if( $deelnemer->is_deleted == 0)
+                                                nee  @else  ja  @endif</li>
                                         <li>
                                             <a class="btn btnLarge" href="{{ route('editdeelnemer', $deelnemer->id) }}">Deelnemer
                                                 aanpassen </a>

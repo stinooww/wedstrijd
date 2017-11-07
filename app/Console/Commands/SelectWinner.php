@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Deelnemer;
+use App\Wedstrijd;
 use App\Winnaar;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class SelectWinner extends Command
@@ -41,17 +43,22 @@ class SelectWinner extends Command
     public function handle()
     {
         $date = Carbon::now();
-        $randomwinnaar = Deelnemer::where('question', 20)->orderByRaw("RAND()")->get();
-        //   $period = Period::where('endDate', '>', $date)->get()->first();
-        $winnaarID = $randomwinnaar[0]->id;
+
+        $activeGame = Wedstrijd::where('is_active', 1)->get()->first();
+        $activeGame = $activeGame->id;
+        $randomwinnaar = Deelnemer::where([
+            ['question', 20],
+            ['wedstrijd_id', $activeGame],
+        ])->orderByRaw("RAND()")->get()->first();
+
+        $winnaarID = $randomwinnaar->id;
+        //  dd($winnaarID);
 
         $winnaar = new Winnaar();
         $winnaar->deelnemer_id = $winnaarID;
-
-
         $winnaar->save();
-//        $this->info($period);
-        return app('App\Http\Controllers\ParticipantController')->SendWinningMail($winnaarID);
+        $this->info($winnaar);
+        return app('App\Http\Controllers\ParticipantController')->SendWinningMail();
 
     }
 }

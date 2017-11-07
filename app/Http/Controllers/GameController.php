@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\WedstrijdRequest;
 use App\User;
 use App\Wedstrijd;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use League\Flysystem\Exception;
 
 class GameController extends Controller
 {
@@ -28,10 +29,8 @@ class GameController extends Controller
 
     public function create(Request $request, WedstrijdRequest $wedstrijdRequest)
     {
-        if (Wedstrijd::all()) {
-            $actieve_wedstrijd = Wedstrijd::where('is_active', 1)->get();
 
-        }
+        $date = Carbon::now();
         // $wedstrijdID = Wedstrijd::first();
         $verantwoordelijke = User::where('role_id', 2)->get();
 
@@ -41,19 +40,23 @@ class GameController extends Controller
         if ($role[0]->role_id == 2) {
             if ($request->isMethod('POST')) {
 
-
-                $wedstrijd = new Wedstrijd();
-                $wedstrijd->user_id = $verantwoordelijke[0]->id;
-                $wedstrijd->name = $wedstrijdRequest->name;
-                $wedstrijd->start_date = $wedstrijdRequest->start_date;
-                $wedstrijd->end_date = $wedstrijdRequest->end_date;
-                $wedstrijd->is_active = $wedstrijdRequest->is_active;
-                $wedstrijd->save();
-                $request->session()->flash('flash_message', 'Wedstrijd toegevoegd');
+                try {
+                    $wedstrijd = new Wedstrijd();
+                    $wedstrijd->user_id = $verantwoordelijke[0]->id;
+                    $wedstrijd->name = $wedstrijdRequest->name;
+                    $wedstrijd->start_date = $wedstrijdRequest->start_date;
+                    $wedstrijd->end_date = $wedstrijdRequest->end_date;
+                    $wedstrijd->is_active = $wedstrijdRequest->is_active;
+                    $wedstrijd->save();
+                    $request->session()->flash('flash_message', 'Wedstrijd toegevoegd');
 //                Session::flash('success', '');
-                return redirect()->back();
+                    return redirect()->back();
+                } catch (\Exception $ex) {
+                    $request->session()->flash('flash_message', 'error, probeer opnieuw');
+                }
+
             }
-            $request->session()->flash('flash_message', 'error, probeer opnieuw');
+
 
         } else {
             $request->session()->flash('flash_message', 'error, u mag geen wedstrijd aanmaken');
@@ -79,18 +82,22 @@ class GameController extends Controller
         $role = User::where('id', '=', $userid)->get();
         if ($role[0]->role_id == 2) {
             if ($request->isMethod('POST')) {
+                try {
+                    $wedstrijd->name = $wedstrijdRequest->name;
+                    $wedstrijd->start_date = $wedstrijdRequest->start_date;
+                    $wedstrijd->end_date = $wedstrijdRequest->end_date;
+                    $wedstrijd->is_active = $wedstrijdRequest->is_active;
+                    $wedstrijd->save();
+
+                    $request->session()->flash('flash_message', 'Wedstrijd aangepast');
+                    return redirect()->back();
+                } catch (Exception $ex) {
+                    $request->session()->flash('flash_message', 'Wedstrijd niet aangepast');
+
+                }
 
 
-                $wedstrijd->name = $wedstrijdRequest->name;
-                $wedstrijd->start_date = $wedstrijdRequest->start_date;
-                $wedstrijd->end_date = $wedstrijdRequest->end_date;
-                $wedstrijd->is_active = $wedstrijdRequest->is_active;
-                $wedstrijd->save();
-
-                $request->session()->flash('flash_message', 'Wedstrijd aangepast');
-                return redirect()->back();
             }
-            $request->session()->flash('flash_message', 'Wedstrijd niet aangepast');
 
         }
 

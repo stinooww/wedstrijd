@@ -8,6 +8,7 @@ use App\Http\Requests\InschrijvingRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use League\Flysystem\Exception;
@@ -95,7 +96,7 @@ class ParticipantController extends Controller
 
             $message->to($activeAdminEmail)->subject('Deelnemerslijst');
         });
-        dd('Mail Send Successfully');
+        // dd('Mail Send Successfully');
         Session::flash("success", ("Deelnemerslijst naar e-mailmanagers verstuurd!"));
         return redirect()->back();
     }
@@ -114,11 +115,14 @@ class ParticipantController extends Controller
         return;
     }
 
-    public function SendWinningMail($winnaarID)
+    public function SendWinningMail()
     {
 
         //  dd($userEmail[0]->email);
-        Mail::send('mail.email', [], function ($message, $winnaarID) {
+        Mail::send('mail.email', [], function ($message) {
+            $winnaarID = DB::table('winnaar')->orderByRaw('created_at', 'desc')->get();
+            // dd();
+            $winnaarID = $winnaarID[0]->id;
 
             $userEmail = User::where('id', $winnaarID)->get();
             //  $winnaar = Winnaar::with('deelnemer')->where('id', '=', 'deelnemer_id')->take(1)->get()->first();
