@@ -11,7 +11,7 @@
 
 <h1>Gefeliciteerd, u hebt gewonnen!</h1>
 
-<h2>We sturen u de te goed bon naar het opgegevne adres en kan u die in elk cafe gebruiken!.</h2>
+<h2>We sturen u de te-goed-bon naar het opgegeve adres en kan u die in elk cafe gebruiken!</h2>
 
 
 <p>Het Jupiler team</p>

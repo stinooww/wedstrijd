@@ -65,7 +65,10 @@ Route::post('deelnemers/show/excel', 'ParticipantController@DownloadExcel')->mid
 Route::post('deelnemers/show/mail', 'ParticipantController@SendMail')->middleware('auth')->name('email');
 //Route::post('deelnemers/show/mail/{id}', 'ParticipantController@SendWinningMail')->middleware('auth')->name('email');
 
+//facebook share
 
-
-
+//Route::get('/wedstrijd/wedstrijd', function()
+//{
+//    return Share::load('https://wedstrijd.stijn.heynderickx.mtantwerp.eu/', 'Jupiler game')->facebook();
+//});
 

@@ -27,6 +27,20 @@
 
                         <a id="call" class="btnLarge" href="{{ route('inschrijvingspagina') }}">Doe mee aan de
                             wedstrijd</a>
+                        <div id="fb-root"></div>
+                        <script>(function (d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id)) return;
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = 'https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v2.11&appId=229825640885462';
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));</script>
+                        <div class="fb-share-button" data-href="https://wedstrijd.stijn.heynderickx.mtantwerp.eu/"
+                             data-layout="button_count" data-size="large" data-mobile-iframe="true"><a
+                                    class="fb-xfbml-parse-ignore" target="_blank"
+                                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwedstrijd.stijn.heynderickx.mtantwerp.eu%2F&amp;src=sdkpreparse">Delen</a>
+                        </div>
                         <div class="clearfix "></div>
 
                             <div class="col-md-6 col-md-offset-3">

@@ -77,28 +77,33 @@ class ParticipantController extends Controller
     }
 
 //verstuurd een email naar emailverantwoordelijke met list van alle deelnemers
-    public function SendMail()
+    public function SendMail(Request $request)
     {
-        $actieveAdmin = User::where('role_id', 1)->get();
-        // $emailVerantwoordelijke = Email::where('wedstrijd_id', '=', 3)->get();
-        // dd($emailVerantwoordelijke[0]->name);
+        if (Auth::id()) {
+            $actieveAdmin = User::where('role_id', 1)->get()->first();
+            // $emailVerantwoordelijke = Email::where('wedstrijd_id', '=', 3)->get();
+            // dd($emailVerantwoordelijke[0]->name);
 
-        // dd(env('DB_DATABASE'));
-        if ()
-        $deelnemers = Deelnemer::all();
-        Mail::send('deelnemers.show', ['deelnemerslijst' => $deelnemers], function ($message) {
-            $actieveAdmin = User::where('role_id', 1)->get();
-            $activeAdminEmail = $actieveAdmin[0]->email;
-            dd($activeAdminEmail);
-            //    dd($activeAdminId);
-            //     $emailVerantwoordelijke = Email::with('users')->where('user_id', '=', $activeAdminId)->get();
+            // dd($actieveAdmin);
+            if ($actieveAdmin) {
+                $deelnemers = Deelnemer::all();
+                Mail::send('deelnemers.show', ['deelnemerslijst' => $deelnemers], function ($message) {
+                    $actieveAdmin = User::where('role_id', 1)->get();
+                    $activeAdminEmail = $actieveAdmin[0]->email;
+                    // dd($activeAdminEmail);
+                    //    dd($activeAdminId);
+                    //     $emailVerantwoordelijke = Email::with('users')->where('user_id', '=', $activeAdminId)->get();
 
-            //   dd($emailVerantwoordelijke[0]->email);
+                    //   dd($emailVerantwoordelijke[0]->email);
 
-            $message->to($activeAdminEmail)->subject('Deelnemerslijst');
-        });
-        dd('Mail Send Successfully');
-        // Session::flash("success", ("Deelnemerslijst naar e-mailmanagers verstuurd!"));
+                    $message->to($activeAdminEmail)->subject('Deelnemerslijst');
+                });
+                $request->session()->flash('flash_message', 'Mail Send Successfully');
+
+            } else {
+                $request->session()->flash('flash_message', 'Er bevond zich geen wedstrijdverantwoordelijke');
+            }
+        }
         return redirect()->back();
     }
 
@@ -106,11 +111,9 @@ class ParticipantController extends Controller
     public function SendAutoMail()
     {
         $deelnemers = Deelnemer::all();
-        Mail::send('deelnemers.show', ['deelnemerslijst' => $deelnemers, 'errors' => []], function ($message) {
-
-
-            $emailVerantwoordelijke = User::where('role_id', 1)->get();
-            $message->to($emailVerantwoordelijke[0]->email)->subject('Deelnemerslijst');
+        Mail::send('deelnemers.show', ['deelnemerslijst' => $deelnemers], function ($message) {
+            $emailVerantwoordelijke = User::where('role_id', 1)->get()->first();
+            $message->to($emailVerantwoordelijke->email)->subject('Deelnemerslijst');
 
         });
         return;
@@ -121,13 +124,13 @@ class ParticipantController extends Controller
 
         //  dd($userEmail[0]->email);
         Mail::send('mail.email', [], function ($message) {
-            $winnaarID = DB::table('winnaar')->orderByRaw('created_at', 'desc')->get();
-            // dd();
-            $winnaarID = $winnaarID[0]->id;
+            $winnaarID = DB::table('winnaar')->orderByRaw('created_at', 'desc')->get()->last();
+            $winnaarID = $winnaarID->deelnemer_id;
 
-            $userEmail = User::where('id', $winnaarID)->get();
+//dd($winnaarID);
+            $userEmail = Deelnemer::where('id', '=', $winnaarID)->get();
             //  $winnaar = Winnaar::with('deelnemer')->where('id', '=', 'deelnemer_id')->take(1)->get()->first();
-
+            //  dd($userEmail);
             $message->to($userEmail[0]->email)->subject('Proficiat u heeft 5 meter bier gewonnen!');
         });
         return;

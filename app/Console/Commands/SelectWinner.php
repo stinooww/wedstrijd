@@ -46,13 +46,14 @@ class SelectWinner extends Command
 
         $activeGame = Wedstrijd::where('is_active', 1)->get()->first();
         $activeGame = $activeGame->id;
+        $this->info($activeGame);
         $randomwinnaar = Deelnemer::where([
             ['question', 20],
             ['wedstrijd_id', $activeGame],
         ])->orderByRaw("RAND()")->get()->first();
 
         $winnaarID = $randomwinnaar->id;
-        //  dd($winnaarID);
+        $this->info($winnaarID);
 
         $winnaar = new Winnaar();
         $winnaar->deelnemer_id = $winnaarID;
