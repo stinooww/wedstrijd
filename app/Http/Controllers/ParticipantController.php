@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Deelnemer;
 use App\Email;
-use App\Http\Requests\InschrijvingRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,9 +29,19 @@ class ParticipantController extends Controller
         }
     }
 
-    public function edit(Request $request, InschrijvingRequest $RegisterReq, $id)
+    public function edit(Request $request, $id)
     {
+        $rules = [
 
+            'first_name' => 'required|string|min:2|max:255',
+            'last_name' => 'required|string|min:2|max:255',
+            'email' => 'required|email',
+            'streetname' => 'string|min:2|max:255',
+            'streetnumber' => 'integer|max:9999',
+            'postcode' => 'integer|max:9999',
+            'question' => 'required|integer',
+            'deelnemerIP' => 'ip|unique'
+        ];
 
         // $deelnemer = $request->$id;
         $deelnemer = Deelnemer::findOrFail($id);
@@ -42,23 +51,26 @@ class ParticipantController extends Controller
         $role = User::where('id', '=', $userid)->get();
         if ($userid) {
             if ($method === 'POST') {
-                try {
-                    $deelnemer->firstname = $RegisterReq->firstname;
-                    $deelnemer->lastname = $RegisterReq->lastname;
-                    $deelnemer->email = $RegisterReq->email;
-                    $deelnemer->streetname = $RegisterReq->streetname;
-                    $deelnemer->streetnumber = $RegisterReq->streetnumber;
-                    $deelnemer->postcode = $RegisterReq->postcode;
-                    $deelnemer->qualified = $request->input('qualified');
-                    $deelnemer->is_deleted = $request->input('is_deleted');
-                    $deelnemer->question = $RegisterReq->question;
-                    $deelnemer->save();
-                    $request->session()->flash('flash_message', 'Deelnemer werd aangepast');
-                    return redirect()->back();
-                } catch (Exception $exception) {
-                    $request->session()->flash('flash_message', 'fout tijdens het toevoegen');
-                    // echo $exception;
+                $valid = $this->validate($request, $rules);
+                if ($valid) {
+                    try {
+                        $deelnemer->firstname = $request->firstname;
+                        $deelnemer->lastname = $request->lastname;
+                        $deelnemer->email = $request->email;
+                        $deelnemer->streetname = $request->streetname;
+                        $deelnemer->streetnumber = $request->streetnumber;
+                        $deelnemer->postcode = $request->postcode;
+                        $deelnemer->qualified = $request->input('qualified');
+                        $deelnemer->is_deleted = $request->input('is_deleted');
+                        $deelnemer->question = $request->question;
+                        $deelnemer->save();
+                        $request->session()->flash('flash_message', 'Deelnemer werd aangepast');
+                        return redirect()->back();
+                    } catch (Exception $exception) {
+                        $request->session()->flash('flash_message', 'fout tijdens het toevoegen');
+                        // echo $exception;
 
+                    }
                 }
             }
             return view('deelnemers.edit', compact('deelnemer'));

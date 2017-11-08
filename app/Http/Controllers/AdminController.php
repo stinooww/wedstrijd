@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AdminRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,8 +45,13 @@ class AdminController extends Controller
         }
     }
 //    // wedstrijdverantwoordelijke instellen
-    public function update(Request $request, AdminRequest $adminrequest, $id)
+    public function update(Request $request, $id)
     {
+        $rules = [
+            'name' => 'required',
+            'email' => 'required',
+            'role_id' => 'required',
+        ];
         $admin = User::findOrFail($id);
         $adminList = User::all();
         $activeAdmin = User::where('id', $id)->get();
@@ -56,17 +60,19 @@ class AdminController extends Controller
         $role = User::where('id', '=', $userid)->get();
         if (Auth::id()) {
             if ($request->isMethod('POST')) {
+                $valid = $this->validate($request, $rules);
+                if ($valid) {
+                    try {
+                        $admin->name = $request->name;
+                        $admin->email = $request->email;
+                        $admin->role_id = $request->role_id;
+                        $admin->save();
 
-                try {
-                    $admin->name = $adminrequest->name;
-                    $admin->email = $adminrequest->email;
-                    $admin->role_id = $adminrequest->role_id;
-                    $admin->save();
-
-                    $request->session()->flash('flash_message', 'admin aangepast');
-                    return redirect()->back();
-                } catch (Exception $ex) {
-                    $request->session()->flash('flash_message', 'admin niet aangepast');
+                        $request->session()->flash('flash_message', 'admin aangepast');
+                        return redirect()->back();
+                    } catch (Exception $ex) {
+                        $request->session()->flash('flash_message', 'admin niet aangepast');
+                    }
                 }
 
                 // return view('admin.show', compact('adminList'));
