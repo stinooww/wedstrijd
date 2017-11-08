@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\WedstrijdRequest;
 use App\User;
 use App\Wedstrijd;
 use Carbon\Carbon;
@@ -40,9 +39,6 @@ class GameController extends Controller
 
     public function create(Request $request)
     {
-
-
-
         $rules = [
             //
             'name' => 'required|string',
@@ -51,9 +47,6 @@ class GameController extends Controller
             'periode' => 'integer|min:4',
             'is_active' => 'boolean',
         ];
-
-
-
         $i = 1;
 
         $date = Carbon::now();
@@ -110,13 +103,17 @@ class GameController extends Controller
         return view('wedstrijd.create');
     }
 
-    public function update(Request $request, WedstrijdRequest $wedstrijdRequest, $wedstrijdId)
+    public function update(Request $request, $wedstrijdId)
     {
+        $rules = [
+            //
+            'name' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'periode' => 'integer|min:4',
+            'is_active' => 'boolean',
+        ];
 
-        if (Wedstrijd::all()) {
-            $actieve_wedstrijd = Wedstrijd::where('is_active', 1)->get();
-            // dd($actieve_wedstrijd->id);
-        }
         $wedstrijdID = Wedstrijd::first();
         //  $wedstrijdId = Wedstrijd::first();
         //  $new = $actieve_wedstrijd->id;
@@ -127,21 +124,23 @@ class GameController extends Controller
         $role = User::where('id', '=', $userid)->get();
         if ($role[0]->role_id == 1) {
             if ($request->isMethod('POST')) {
-                try {
-                    $wedstrijd->name = $wedstrijdRequest->name;
-                    $wedstrijd->periode = $wedstrijdRequest->periode;
-                    $wedstrijd->start_date = $wedstrijdRequest->start_date;
-                    $wedstrijd->end_date = $wedstrijdRequest->end_date;
-                    $wedstrijd->is_active = $wedstrijdRequest->is_active;
-                    $wedstrijd->save();
+                $valid = $this->validate($request, $rules);
+                if ($valid) {
+                    try {
+                        $wedstrijd->name = $request->name;
+                        $wedstrijd->periode = $request->periode;
+                        $wedstrijd->start_date = $request->start_date;
+                        $wedstrijd->end_date = $request->end_date;
+                        $wedstrijd->is_active = $request->is_active;
+                        $wedstrijd->save();
 
-                    $request->session()->flash('flash_message', 'Wedstrijd aangepast');
-                    return redirect()->back();
-                } catch (Exception $ex) {
-                    $request->session()->flash('flash_message', 'Wedstrijd niet aangepast');
+                        $request->session()->flash('flash_message', 'Wedstrijd aangepast');
+                        return redirect()->back();
+                    } catch (Exception $ex) {
+                        $request->session()->flash('flash_message', 'Wedstrijd niet aangepast');
 
+                    }
                 }
-
 
             }
 
