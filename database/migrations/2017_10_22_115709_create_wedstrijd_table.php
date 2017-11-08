@@ -18,7 +18,7 @@ class CreateWedstrijdTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
+            $table->integer('duur')->default(4);
             $table->string('name');
             $table->date('start_date');
             $table->date('end_date');

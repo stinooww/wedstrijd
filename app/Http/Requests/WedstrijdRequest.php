@@ -28,6 +28,7 @@ class WedstrijdRequest extends FormRequest
             'name.required' => 'de wedstrijdnaam is verplicht',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
+            'duur' => 'integer|min:4',
             'is_active' => 'boolean',
         ];
     }

@@ -32,6 +32,12 @@
                         </div>
                     </div>
                     <div class="form-group inputss">
+                        {!! Form::label('duur', 'Hoeveel dagen duurt elke wedstrijd?',['class'=> 'col-md-5 control-label controle'])  !!}
+                        <div class="col-md-7 ">
+                            {!! Form::number('duur', null, ['class' => 'form-control inputsField']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group inputss">
                         {!! Form::label('start_date', 'Startdatum',['class'=> 'col-md-5 control-label controle'])  !!}
                         <div class="col-md-7 ">
                             {!! Form::date('start_date', null, ['class' => 'form-control inputsField']) !!}

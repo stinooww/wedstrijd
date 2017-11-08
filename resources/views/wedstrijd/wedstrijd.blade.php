@@ -15,6 +15,7 @@
 
 
                     </div>
+                <div class="clearfix "></div>
                     @include("feedback.session")
                     @include("feedback.error")
                 @if($actieve_wedstrijd)
@@ -49,6 +50,7 @@
                                 @foreach($actieve_wedstrijd as $activeGame)
                                     <p>Wedstrijdid: {{ $activeGame->id }}</p>
                                     <p>Wedstrijdnaam: {{ $activeGame->name }}</p>
+                                    <p>Aantal dagen: {{ $activeGame->duur }}</p>
                                     <p>Start datum: {{ $activeGame->start_date }}</p>
                                     <p>Eind datum: {{ $activeGame->end_date }}</p>
 
