@@ -26,18 +26,18 @@
 
                 {{ csrf_field() }}
                 <div class="form-group inputss">
-                    {!! Form::label('firstname', 'Voornaam',['class'=> 'col-md-5 control-label controle'])  !!}
+                    {!! Form::label('first_name', 'Voornaam',['class'=> 'col-md-5 control-label controle'])  !!}
                     <div class="col-md-7 ">
-                        {!! Form::text('firstname', null, ['class' => 'form-control inputsField']) !!}
+                        {!! Form::text('first_name', null, ['class' => 'form-control inputsField']) !!}
                     </div>
                     <div class="col-md-2">
                         <span id="errorFirst"></span>
                     </div>
                 </div>
                 <div class="form-group inputss">
-                    {!! Form::label('lastname', 'Achternaam',['class'=> 'col-md-5 control-label controle'])  !!}
+                    {!! Form::label('last_name', 'Achternaam',['class'=> 'col-md-5 control-label controle'])  !!}
                     <div class="col-md-7 ">
-                        {!! Form::text('lastname', null, ['class' => 'form-control inputsField']) !!}
+                        {!! Form::text('last_name', null, ['class' => 'form-control inputsField']) !!}
                     </div>
                 </div>
                 <div class="form-group inputss">

@@ -28,7 +28,7 @@ class InschrijvingRequest extends FormRequest
             'last_name' => 'required|string|min:2|max:255',
             'email' => 'required|email',
             'streetname' => 'string|min:2|max:255',
-            'streetnumber' => 'integer|max:255',
+            'streetnumber' => 'integer|max:9999',
             'postcode' => 'integer|max:9999',
             'question.required.integer' => 'de vraag is verplicht',
             'deelnemerIP' => 'ip|unique'
