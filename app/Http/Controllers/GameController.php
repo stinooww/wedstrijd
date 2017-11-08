@@ -38,47 +38,65 @@ class GameController extends Controller
 
     }
 
-    public function create(Request $request, WedstrijdRequest $wedstrijdRequest)
+    public function create(Request $request)
     {
+
+
+
+        $rules = [
+            //
+            'name' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'periode' => 'integer|min:4',
+            'is_active' => 'boolean',
+        ];
+
+
+
         $i = 1;
 
         $date = Carbon::now();
         // $wedstrijdID = Wedstrijd::first();
-        $verantwoordelijke = User::where('role_id', 2)->get();
+        $verantwoordelijke = User::where('role_id', 1)->get();
 
         //    dd($verantwoordelijke[0]->id);
         $userid = Auth::id();
         $role = User::where('id', '=', $userid)->get();
+        // dd($verantwoordelijke);
+
         if ($role[0]->role_id == 1) {
             if ($request->isMethod('POST')) {
-
-                try {
-                    $wedstrijd = new Wedstrijd();
-                    $wedstrijd->user_id = $verantwoordelijke[0]->id;
-                    $wedstrijd->name = $wedstrijdRequest->name;
-                    $wedstrijdNaam = $wedstrijdRequest->name;
-                    $wedstrijd->periode = $wedstrijdRequest->periode;
-                    $wedstrijd->start_date = $wedstrijdRequest->start_date;
-                    $wedstrijd->end_date = $wedstrijdRequest->end_date;
-                    $volgendeWedstrijd = $wedstrijdRequest->end_date;
-                    $wedstrijd->is_active = $wedstrijdRequest->is_active;
-                    $wedstrijd->save();
-                    for ($i; $i < 4; $i++) {
+                $valid = $this->validate($request,$rules);
+                if ($valid){
+                    try {
                         $wedstrijd = new Wedstrijd();
                         $wedstrijd->user_id = $verantwoordelijke[0]->id;
-                        $wedstrijd->name = $wedstrijdNaam . $i;
-                        $wedstrijd->start_date = $volgendeWedstrijd;
-                        $volgendeWedstrijd = date('Y-m-d', strtotime($volgendeWedstrijd . ' + ' . $wedstrijdRequest->periode . ' days'));
-                        $wedstrijd->end_date = $volgendeWedstrijd;
-                        $wedstrijd->is_active = 0;
+                        $wedstrijd->name = $request->name;
+                        $wedstrijdNaam = $request->name;
+                        $wedstrijd->periode = $request->periode;
+                        $wedstrijd->start_date = $request->start_date;
+                        $wedstrijd->end_date = $request->end_date;
+                        $volgendeWedstrijd = $request->end_date;
+                        $wedstrijd->is_active = $request->is_active;
                         $wedstrijd->save();
+                        for ($i; $i < 4; $i++) {
+                            $wedstrijd = new Wedstrijd();
+                            $wedstrijd->user_id = $verantwoordelijke[0]->id;
+                            $wedstrijd->name = $wedstrijdNaam . $i;
+                            $wedstrijd->start_date = $volgendeWedstrijd;
+                            $volgendeWedstrijd = date('Y-m-d', strtotime($volgendeWedstrijd . ' + ' . $request->periode . ' days'));
+                            $wedstrijd->end_date = $volgendeWedstrijd;
+                            $wedstrijd->is_active = 0;
+                            $wedstrijd->save();
 
+                        }
+                        $request->session()->flash('flash_message', 'Wedstrijd toegevoegd');
+    //                Session::flash('success', '');
+                        return redirect()->back();
+                    } catch (\Exception $ex) {
+                        $request->session()->flash('flash_message', 'error, kijk alle velden goed na'.$ex);
                     }
-                    $request->session()->flash('flash_message', 'Wedstrijd toegevoegd');
-//                Session::flash('success', '');
-                    return redirect()->back();
-                } catch (\Exception $ex) {
-                    $request->session()->flash('flash_message', 'error, kijk alle velden goed na');
                 }
 
             }
