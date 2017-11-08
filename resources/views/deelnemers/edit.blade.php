@@ -27,13 +27,13 @@
                         <div class="col-md-6 ">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                {{ Form::label('firstname', 'Voornaam', array('class' => 'control-label pull-left')) }}
-                                <input type="text" class="form-control" name="firstname"
+                                {{ Form::label('first_name', 'Voornaam', array('class' => 'control-label pull-left')) }}
+                                <input type="text" class="form-control" name="first_name"
                                        value="{{$deelnemer->firstname}}">
                             </div>
                             <div class="form-group">
-                                {{ Form::label('lastname', 'Achternaam', array('class' => 'control-label pull-left')) }}
-                                <input type="text" class="form-control" name="lastname"
+                                {{ Form::label('last_name', 'Achternaam', array('class' => 'control-label pull-left')) }}
+                                <input type="text" class="form-control" name="last_name"
                                        value="{{$deelnemer->lastname}}">
                             </div>
 

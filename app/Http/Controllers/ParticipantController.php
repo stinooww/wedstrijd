@@ -54,8 +54,8 @@ class ParticipantController extends Controller
                 $valid = $this->validate($request, $rules);
                 if ($valid) {
                     try {
-                        $deelnemer->firstname = $request->firstname;
-                        $deelnemer->lastname = $request->lastname;
+                        $deelnemer->firstname = $request->first_name;
+                        $deelnemer->lastname = $request->last_name;
                         $deelnemer->email = $request->email;
                         $deelnemer->streetname = $request->streetname;
                         $deelnemer->streetnumber = $request->streetnumber;
