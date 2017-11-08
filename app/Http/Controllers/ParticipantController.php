@@ -23,7 +23,7 @@ class ParticipantController extends Controller
     {
         $userid = Auth::id();
         $role = User::where('id', '=', $userid)->get();
-        if ($role[0]->role_id == 2) {
+        if ($userid) {
             $deelnemerslijst = Deelnemer::all();
             //  echo $deelnemerslijst[0]->id;
             return view('deelnemers.show')->with(compact('deelnemerslijst'));
@@ -40,7 +40,7 @@ class ParticipantController extends Controller
         $method = $request->method();
         $userid = Auth::id();
         $role = User::where('id', '=', $userid)->get();
-        if ($role[0]->role_id == 2) {
+        if ($userid) {
             if ($method === 'POST') {
                 try {
                     $deelnemer->firstname = $RegisterReq->firstname;

@@ -6,7 +6,7 @@
             <div class="col-lg-offset-2 col-lg-10 col-md-offset-2 col-md-10 col-sm-12">
                 <div class="breadcrumb col-lg-4 col-md-4">
 
-                    <a href="{{ route('homepage') }}"><- ga terug</a>
+                    <a href="{{ route('wedstrijdindex') }}"><- ga terug</a>
 
                     <br>
                     <br>
@@ -24,7 +24,7 @@
                     <h2 class="text-center">Wedstrijd aanmaken</h2>
                     {!! Form::open(array('route' => 'createwedstrijd','class' => 'form-horizontal')) !!}
                     {{ csrf_field() }}
-
+                    {{ method_field('POST') }}
                     <div class="form-group inputss">
                         {!! Form::label('name', 'WedstrijdNaam',['class'=> 'col-md-5 control-label controle'])  !!}
                         <div class="col-md-7 ">
@@ -32,9 +32,9 @@
                         </div>
                     </div>
                     <div class="form-group inputss">
-                        {!! Form::label('duur', 'Hoeveel dagen duurt elke wedstrijd?',['class'=> 'col-md-5 control-label controle'])  !!}
+                        {!! Form::label('periode', 'Hoeveel dagen duurt elke wedstrijd?',['class'=> 'col-md-5 control-label controle'])  !!}
                         <div class="col-md-7 ">
-                            {!! Form::number('duur', null, ['class' => 'form-control inputsField']) !!}
+                            {!! Form::number('periode', null, ['class' => 'form-control inputsField']) !!}
                         </div>
                     </div>
                     <div class="form-group inputss">

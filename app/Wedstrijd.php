@@ -14,7 +14,7 @@ class wedstrijd extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'start_date', 'end_date', 'is_active', 'duur'
+        'name', 'start_date', 'end_date', 'is_active', 'periode'
     ];
 
     public function user()

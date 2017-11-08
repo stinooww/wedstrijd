@@ -18,7 +18,7 @@
                 <div class="clearfix "></div>
                     @include("feedback.session")
                     @include("feedback.error")
-                @if($actieve_wedstrijd)
+
                     <div class="clearfix "></div>
 
                     <section class="wedstrijd">
@@ -44,13 +44,14 @@
                         </div>
                         <div class="clearfix "></div>
 
+                        @if($wedstrijd)
                             <div class="col-md-6 col-md-offset-3">
                                 <h3>Huidige wedstrijd</h3>
 
                                 @foreach($actieve_wedstrijd as $activeGame)
                                     <p>Wedstrijdid: {{ $activeGame->id }}</p>
                                     <p>Wedstrijdnaam: {{ $activeGame->name }}</p>
-                                    <p>Aantal dagen: {{ $activeGame->duur }}</p>
+                                    <p>Aantal dagen: {{ $activeGame->periode }}</p>
                                     <p>Start datum: {{ $activeGame->start_date }}</p>
                                     <p>Eind datum: {{ $activeGame->end_date }}</p>
 
@@ -65,7 +66,8 @@
                     <div class="clearfix "></div>
 
                     <div class="col-sm-12 text-center">
-
+                        <br>
+                        <br>
 
                         @if(Auth::check())
                             <div class="col-sm-4 text-center">
@@ -76,7 +78,8 @@
 
                         @endforeach
                         @else
-                            <p>jooo</p>
+                            <br>
+                            <br>
                             @if(Auth::check())
                                 <div class="col-sm-4 col-sm-offset-2">
                                     <a class="btn btnLarge" href="{{ route('createwedstrijd') }}">Wedstrijd aanmaken</a>

@@ -32,9 +32,9 @@
                         </div>
                     </div>
                     <div class="form-group inputss">
-                        {!! Form::label('duur', 'Hoeveel dagen duurt elke wedstrijd?',['class'=> 'col-md-5 control-label controle'])  !!}
+                        {!! Form::label('periode', 'Hoeveel dagen duurt elke wedstrijd?',['class'=> 'col-md-5 control-label controle'])  !!}
                         <div class="col-md-7 ">
-                            {!! Form::number('duur', null, ['class' => 'form-control inputsField']) !!}
+                            {!! Form::number('periode', null, ['class' => 'form-control inputsField']) !!}
                         </div>
                     </div>
                     <div class="form-group inputss">

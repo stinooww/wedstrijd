@@ -13,7 +13,8 @@ class WedstrijdRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return \Auth::check();
+
     }
 
     /**
@@ -25,10 +26,10 @@ class WedstrijdRequest extends FormRequest
     {
         return [
             //
-            'name.required' => 'de wedstrijdnaam is verplicht',
+            'name' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
-            'duur' => 'integer|min:4',
+            'periode' => 'integer|min:4',
             'is_active' => 'boolean',
         ];
     }

@@ -21,7 +21,7 @@ class AdminController extends Controller
     {
         $userid = Auth::id();
         $role = User::where('id', '=', $userid)->get();
-        if ($role[0]->role_id == 2) {
+        if (Auth::id()) {
             return view('dashboard.home');
         }
     }
@@ -38,7 +38,7 @@ class AdminController extends Controller
 
         $userid = Auth::id();
         $role = User::where('id', $userid)->get();
-        if ($role[0]->role_id == 2) {
+        if (Auth::id()) {
             //  echo "de rol".$role;
             $adminList = User::all();
             //dd($adminList);
@@ -54,7 +54,7 @@ class AdminController extends Controller
         // dd($activeAdmin);
         $userid = Auth::id();
         $role = User::where('id', '=', $userid)->get();
-        if ($role[0]->role_id == 2) {
+        if (Auth::id()) {
             if ($request->isMethod('POST')) {
 
                 try {
