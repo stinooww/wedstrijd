@@ -14,25 +14,13 @@ class GameController extends Controller
     {
         $is_valid = false;
         $wedstrijd = Wedstrijd::where('is_active', '=', '1')->exists();
-        //   dd($wedstrijd);
-        if ($wedstrijd === true) {
-            // dd($wedstrijd);
-            //  $actieve_wedstrijd = Wedstrijd::where('is_active', '=', 1)->get();
-            $is_valid = true;
-            // dd($is_valid);
-        }
-//            if( $actieve_wedstrijd){
-//                echo true;
-//            }
-//        }
-//echo false;
-        $actieve_wedstrijd = Wedstrijd::where('is_active', '1')->get();
-        // dd($actieve_wedstrijd[0]->id);
 
-        //  $new = $actieve_wedstrijd->id;
-//dd($wedstrijd);
-        //  $wedstrijdID = Wedstrijd::first();
-//dd( $wedstrijdID->id);
+        if ($wedstrijd === true) {
+
+        }
+
+        $actieve_wedstrijd = Wedstrijd::where('is_active', '1')->get();
+
         return view("wedstrijd.wedstrijd", compact('actieve_wedstrijd', 'wedstrijd'));
 
     }

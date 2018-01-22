@@ -119,7 +119,6 @@ class ParticipantController extends Controller
         return redirect()->back();
     }
 
-
     public function SendAutoMail()
     {
         $deelnemers = Deelnemer::all();

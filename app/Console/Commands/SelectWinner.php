@@ -45,29 +45,39 @@ class SelectWinner extends Command
     {
         $date = Carbon::now();
 
-        $activeGame = Wedstrijd::where('is_active', 1)->get()->first();
-        $activeGame = $activeGame->id;
-        $this->info($activeGame);
+        $activegame = Wedstrijd::where('is_active', "1")->get()->first();
 
-        if ($activeGame->end_date == $date) {
+        $activeGame = $activegame->id;
+        // dd($activegame->end_date);
+
+
+        //   $this->info($activeGame->eb h);
+        $this->info($date);
+        if ($activegame->end_date === $date) {
+            $this->info("games on");
             $randomwinnaar = Deelnemer::where([
                 ['question', 20],
                 ['wedstrijd_id', $activeGame],
             ])->orderByRaw("RAND()")->get()->first();
+            $this->info($randomwinnaar);
 
-            $winnaarID = $randomwinnaar->id;
-            $this->info("de winnaar met id " . $winnaarID);
 
-            $winnaar = new Winnaar();
-            $winnaar->deelnemer_id = $winnaarID;
-            $winnaar->save();
-            $this->info($winnaar);
-            $this->nextGame();
-            return app('App\Http\Controllers\ParticipantController')->SendWinningMail();
+            if ($randomwinnaar) {
+                $winnaarID = $randomwinnaar->id;
+                $this->info("de winnaar met id " . $winnaarID);
+
+                $winnaar = new Winnaar();
+                $winnaar->deelnemer_id = $winnaarID;
+                $winnaar->save();
+                $this->info($winnaar);
+                $this->nextGame();
+                return app('App\Http\Controllers\ParticipantController')->SendWinningMail();
+            } else {
+                $this->info('er is geen winnaar');
+            }
         } else {
             $this->info('eind datum van actieve wedstrijd is nog niet vandaag');
         }
-
 
     }
 
